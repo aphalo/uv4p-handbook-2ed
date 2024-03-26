@@ -1,0 +1,307 @@
+---
+title: "BTV 2ed"
+subtitle: "Preliminary plan"
+author: "Pedro J. Aphalo with Marcel A. K. Jansen"
+date: 2023-11-16
+date-modified: 2024-02-15
+format: docx
+editor: visual
+---
+
+*This is how we imagine the 2ed of Beyond the Visible. Edited by Pedro based on feedback from Marcel and earlier exchanges of ideas with Eva Rosenqvist and Matt Robson, as well as comments from chapter authors from the first edition.*
+
+In the list below, author names followed by a question mark indicate that I have not yet asked them to contribute or that they haven't yet given a definitive answer. Otherwise, authors have agreed to update or contribute new material to the respective sections. In my case, I have added my name to those sections to which I would be able to contribute if needed, but this does not mean that this will be needed or important.
+
+Two biggest changes for the second edition are the scope, and how to prepare the manuscript and publish it.
+
+The idea is to cover a broader range of wavelengths. This is mainly Pedro own idea, as Marcel prefers to focus on UV (UV-A, UV-B and possibly? UV-C)*. Pedro thinks, however, that this expansion is very much needed, and does not necessarily require much more work than focusing on UV alone. Even if focusing on UV, other wavelengths would still have to be included in relation to the growing environment and interactions with UV. Pedro's reasoning is, 1) that we now know for sure that all responses to UV depend on the spectrum as a whole, and 2) including VIS and NIR (FR) could expand the audience/readership many fold.*
+
+Main change about the publication approach that we propose is to publish an open access version on-line as HTML files (web pages) and a printed version commercially, if possible. We would start with the on-line version, and publish chapter by chapter when they are "presentable" but not necessarily in their final shape. To make this possible, we need a system that can produce from the same manuscript files the on-line and printed-book versions automatically and using a file format for writing that is agnostic about Windows, Unix (X) or Linux and fairly easy to use by authors.
+
+I suggest that we use Quarto, which is based on markdown and for which RStudio can be used as a source and/or visual editor. There is no need to learn R or many commands, for example `**bold**` results in **bold** and `_italics_` in *italics*. The visual editing mode works like *Word* but with a much more limited set of commands. There is quite good documentation for [Quarto](https://quarto.org/docs/guide/), although a lot of it is irrelevant to our planned use. Simplest for authors would be to use the visual editor in RStudio. This is all free software.
+
+I have tried a translator program called *pandoc* to convert the LaTeX source of the first edition into markdown, and it worked well for the text. So after a bit of manual clean-up this could be used as a starting point for revising existing text. I do have all the original illustrations from the first edition.
+
+# Handbook 2ed Title
+
+Suggestions, for a possible book title
+
+1.  *Field Methods in Plant Photobiology: From Principles to Practice (liked by Marcel, and preferred by Pedro)*
+
+2.  *Plant Photobiology: Recomended Practices and Field Methods*
+
+3.  I would avoid resuing "Beyond the Visible" because of the Google search results for it. Starting with many pages of links related a film about Hilma af Klint released in 2019, of which I've watched only the trailer, but looks very very interesting!
+
+    <https://www.google.com/search?q=%22Beyond+the+Visible%22>
+
+# Scope
+
+-   Wavelength scope: 280--900 nm (expanded to include VIS and FR).
+
+-   Exclude methods used at the lab bench (as in first edition). *The aim is to avoid making the book too long. One could, if editors are available for a second volume, consider producing two volumes, with the plan shown here for volume 1, and a separate volume 2, with metabolomics, ROS-related assays, molecular biology and bioinformatics.*
+
+-   Include gas-exchange and chlorophyll fluorescence (we have Wolgang, Eva, Otmar and also Alexey Shapiguzov as possible authors).
+
+-   Actual computations
+
+    -   My R packages can be used for many calculations relevant to the book. They will greatly simplify the production of many of the illustrations. However, I would rather keep the details of the R code out of BTV2 so that it does not become bloated.
+
+    -   The details of the use of the R packages for photobiology will go into a separate book, for which I already have a partial manuscript.
+
+# Editors
+
+-   Pedro Aphalo
+
+-   Marcel Jansen
+
+-   Wolgang Bilger (?)
+
+-   Eva Rosenqvist (?)
+
+# Publisher
+
+-   UV4Plants as web site, even pre-release chapter by chapter. (This would include publishing on-line advanced drafts for comments.)
+
+-   CRC/Taylor & Francis (if possible, in parallel with the open-access web site, they showed interest when I contacted them)
+
+-   other?
+
+# Chapters for 2nd edition
+
+1\. Radiation and optics
+
+:   Previously: *Introduction / would remain broad and introductory*
+
+    1.  Make the text more accessible to those not-mathematically minded. (Pedro + LOB + Andreas Albert (? at least reuse allowed) + Ylianttila (?))
+
+    2.  Update colour definitions to follow ISO/CIE. (Pedro)
+
+    3.  Update the present discussion on the different quantities, and their variations. (Pedro)
+
+    4.  Describe light sources with different emission geometries, and irradiance vs. distance consequences. (Point sources vs. other sources, would expand diffuse vs. collimated light discussion.) (Pedro)
+
+    5.  Discuss reflectance vs. angle of incidence. (Pedro + LOB)
+
+    6.  Discuss the mechanisms behind fluorescence and luminiscence. (Pedro + LOB + Alexey)
+
+    7.  A short list of key terms, with explanations, possibly as tables as in first edition.
+
+    8.  *Move discussion of radiation in the environment to new chapter 2.*
+
+2\. The UV, VIS and NIR in the environment of plants
+
+:   New chapter.
+
+    1.  The climatology UV and VIS. Including up-to-date maps. (Daniele Griffoni + Anders Lindfors)
+
+    2.  Latitudinal and diurnal variation in UV, VIS and NIR spectrum (Pedro + Max + ?)
+
+    3.  Discuss in depth waveband ratios in nature (Pedro + Matt?).
+
+    4.  Computing the position of the sun and day/night length (Pedro).
+
+    5.  DLI daily light integral (Titta Kotilainen (?))
+
+    6.  Discuss light distribution and sunflecks in canopies (Maxime Durand + Matt)
+
+    7.  Update and expand text on light in aquatic environments. (Pirjo Huovinen + Ivan Gómez?)
+
+3\. Plants and light
+
+:   New chapter. (This chapter is where including visible radiation has most impact)
+
+:   1.  A brief introduction to light sensing by plants? (Luis Morales + Neha Rai+ Jorge Casal?)
+
+    2.  Photosynthesis (Wolfgang (?) + Alexey Shapiguzov)
+
+    3.  Stress and damage (Marcel + Éva Hideg (?))
+
+    4.  Temperature and energy balance (Pedro)
+
+4\. Design, planning and data analysis from photobiological experiments
+
+:   Previously: *Design of photobiological experiments*
+
+    1.  Field and controlled experiments (New, Pedro + Marcel)
+
+    2.  Statistical aspects (Pedro, not much to do. Add MA regression (and quantile regression + deepest curve.) *This was in the first edition, mainly related to design, pseudoreplication and the correspondence between design and matching statistical models.*
+
+    3.  Sampling procedures for laboratory analyses (Pedro?, Neha?, Luis? Nina?)
+
+    4.  Bases of expression for concentrations (Pedro + Nina?) *Answer to Marcel's comment: I have noticed that most reviews about phenolics, make no distinction between concentrations expressed per unit area, unit dry mass or unit fresh mass. This makes, however, a huge difference as SLA and tissue water content can change (and a lot) in response to light and UV treatments.*
+
+5\. Plant cultivation
+
+:   Previously: *Plant cultivation*
+
+    1.  Cultivation of terrestrial plants in controlled environments (Eva Rosenqvist + Pedro)
+
+    2.  Cultivation of terrestrial plants outdoors (Víctor Sadras? + Otmar Urban? + Pedro)
+
+    3.  Weather stations and WMO requirements (Pedro ?).
+
+    4.  Cultivation of aquatic plants (Marcel + Pirjo huovinen)
+
+    5.  Guidelines for reporting plant-growing conditions (Pedro + Titta + Eva Rosenqvist) To Marcel: I would base this on existing published guidelines, adjusted for research on light and UV. <https://www.controlledenvironments.org/>
+
+        <https://www.controlledenvironments.org/wp-content/uploads/sites/6/2017/05/Greenhouse-Guidelines.pdf>
+
+        <https://www.controlledenvironments.org/wp-content/uploads/sites/6/2017/06/Minimum-Guidelines-Brochure-version-A4.pdf>
+
+        WMO has a "Guide to Instruments and Methods of Observation Volume I –Measurement of Meteorological Variables" that is nearly 600 pages long, but could be useful to write some guidelines for weather, including radiation, measurements outdoors, and to check symbols and definitions of variables.
+
+6\. Manipulating UV and VIS radiation
+
+:   Previosuly: *Manipulating UV radiation*
+
+    1.  Update safety considerations to address current regulations and recommendations (including blue light).
+
+    2.  Incandescent and quartz halogen lamps, etc.
+
+    3.  Discharge lamps, including Xenon flash, etc.
+
+    4.  Expand material on LEDs, including approaches to dimming and pulse generation. (Pedro + Alan Morrison)
+
+    5.  Controlling diffuse vs. direct light from artificial sources: Lenses, reflectors, honeycomb grids and other modifiers (Pedro).
+
+    6.  Pulsed vs. steady irradiance with LEDs, fluorescent tubes, and incandescent lamps.
+
+    7.  Update on films and filters needed (expand on the effect of angle of incidence)
+
+    8.  Greenhouse cladding (glass, films, PMM, PC, etc.)
+
+    9.  Greenhouse screens, nets and covers (based on spectral data from Matthew Robson and Titta Kotilainen)
+
+7\. Quantifying UV and VIS radiation
+
+:   Previously: *Quantifying UV radiation*
+
+    1.  Start with broad-band, narrow-band vs. spectrometers.
+
+    2.  Update information on input optics for spectrometers (new shapes, and performance). (Pedro)
+
+    3.  Temperature dependence of calibrations of spectrometers (wavelength and response).
+
+    4.  Temperature dependence of dark noise, and dark references.
+
+    5.  Expand response spectrum of broadband sensors (examples of errors, PAR, ePAR, R, FR, UVA1, UVA2, UVB, pyranometers).
+
+    6.  ePAR vs. PAR (Pedro)
+
+    7.  R:(R + FR) vs. R:FR (Pedro)
+
+    8.  Add computations for Pfr:Ptot photoequilibrium and photocycling. (if possible also CRY with blue:green) (Pedro)
+
+    9.  Update equipment examples to those currently available. (Pedro)
+
+    10. Simulation of the solar spectrum (Anders Lindfors / Maxim Durand + Pedro)
+
+8\. Imaging in UV, VIS and NIR
+
+:   Possible new chapter.
+
+    1.  Still, video and time lapse imaging as research tools (Pedro + Eva).
+
+    2.  Cameras, lenses (Pedro + Ylianttila?).
+
+    3.  Camera Filters, etc., (Pedro)
+
+    4.  Multispectral and hyperspectral imaging (Pedro + Alexey Shapiguzov?).
+
+    5.  UV induced VIS and NIR fluorescence and VIS induced NIR fluorescence (Pedro + Ylianttila + Alexey Shapiguzov (?)).
+
+    6.  Image editing (Eva + Pedro).
+
+        a\. White balance, noise reduction, contrast enhancement.
+
+        b\. Multi-image methods: HDR, focus stacking, panoramas
+
+        c\. Colour profiles and light sources.
+
+        d\. Limits to image editing when images are used as scientific evidence.
+
+9\. Measurement of optical properties of leaves and materials
+
+:   New chapter.
+
+    1.  Epidermal transmittance, etc. (Wolfgang Bilger + Paul Barnes (?))
+
+    2.  Reflectance and transmittance of whole leaves (and flowers?) (Matt? + Pedro + Luis (Albert's group)). Include discussion on black references.
+
+    3.  Filters, etc., (Pedro)
+
+    4.  Fluorescence of leaves (and glass filters!) (Pedro + Alexey Shapiguzov?).
+
+    5.  Optical measurement of chloroplast accumulation (Justyna (?) + Pawel (?))
+
+    6.  In-situ measurement of plant pigments (Dualex, etc.) (Matt? + Wolfgang + Marcel?).
+
+    7.  ~~Measurements of extracted plant pigments (Wolfgang Bilger + Nina Siipari + Susanne + Pedro?)~~
+
+10\. Plant phenotyping for the crowds
+
+:   New chapter.
+
+    1.  Introduction to image analysis with ImageJ (Fang Wang + Pedro).
+
+    2.  Using AI and ML approaches (Pedro + ?).
+
+    3.  Thermal imagining (Pedro + ?).
+
+    4.  Growth analysis, simple introduction (Pedro)
+
+    5.  Porometry (Maxime? + Pedro + Eva?).
+
+    6.  Gas-exchange (Alexey + Eva? + Pedro).
+
+    7.  Chlorophyll fluorescence (Eva + Wolfgang? + Alexey).
+
+11\. Data acquisition and logging
+
+:   New chapter.
+
+    1.  Examples of modern dataloggers, large and small (Pedro + Eva?).
+
+    2.  IOT (Internet of Things) (Alan? + Alexis Dowhuszko?)
+
+    3.  Communication protocols (USB, Wifi, USB, LORA, etc) (Alexis Dowhuszko? + Pedro? + Alan?).
+
+    4.  Protocols SDI-12 and "intelligent sensors" (Pedro + Alan?).
+
+    5.  Time coordinates (Pedro).
+
+    6.  On-line weather and climate data sources (Pedro + Maxime Durand).
+
+    7.  On-line sources of UV, VIS, and NIR irradiance estimates based on satellite sensing (FMI, Kaisa).
+
+    8.  Remote sensing of pigments and photosynthesis (Albert Porcar et al. ?)
+
+12\. Ensuring reproducibility (Pedro? + ?)
+
+:   New chapter.
+
+    1.  Reporting of materials and methods
+
+    2.  Sharing of data
+
+    3.  Reproducibility of data analyses
+
+    4.  Reproducibilty checklist for authors, reviewers and editors
+
+Appendixes
+
+1.  Further reading
+
+2.  Software
+
+3.  Suppliers
+
+4.  Glossary
+
+# Material that could be edited and re-used
+
+From the Bulletin: <https://doi.org/10.19232/uv4pb.2020.1.24>, <https://doi.org/10.19232/uv4pb.2020.1.12>, <https://doi.org/10.19232/uv4pb.2020.1.25>, <https://doi.org/10.19232/uv4pb.2016.1.14>, <https://doi.org/10.19232/uv4pb.2019.1.15>, <https://doi.org/10.19232/uv4pb.2019.1.30>, <https://doi.org/10.19232/uv4pb.2018.1.12>, <https://doi.org/10.19232/uv4pb.2018.2.14>, <https://doi.org/10.19232/uv4pb.2016.2.11>.
+
+From my web site on photography: <https://www.photo-spectrum.info/pages/filters/UV-filters.html>, <https://www.photo-spectrum.info/pages/filters/NIR-filters.html>, <https://www.photo-spectrum.info/pages/filters/uvir-cut-filters.html>, <https://www.photo-spectrum.info/pages/filters/uv-cut-filters.html>, <https://www.photo-spectrum.info/pages/filters/UV-filter-stacks.html>, and possibly other posts with some reusable bits. This whole site as well as <https://www.r4photobiology.info/> have only static content and are built using Quarto. The on-line book could be similar in relation to features, but the styling and design could be different if desired.
+
+From my research-group blog: <https://blogs.helsinki.fi/senpep-blog/2022/12/the-earth-is-not-flat-are-plants-and-plant-canopies-flat/>, <https://blogs.helsinki.fi/senpep-blog/2021/10/bright-times-for-our-growth-chambers/>, <https://blogs.helsinki.fi/senpep-blog/2018/05/visible-and-uv-a-radiation-in-greenhouses/>, <https://blogs.helsinki.fi/senpep-blog/page/4/>.
