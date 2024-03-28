@@ -5,6 +5,7 @@ bibliography: handbook.bib
 format: html
 editor: source
 ---
+
 ```{r, include=FALSE}
 library(ggspectra)
 library(photobiologyWavebands)
@@ -14,15 +15,17 @@ library(photobiologyPlants)
 
 ## Wavelength and Colour
 
-Radiation can be described as waves, with wavelength or frequency as its properties, or based on quantum physics as photons of specific energy. This "double personality" of light is important as each viewpoint provides a simpler explanation for different phenomena, such as refraction an reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell's equations.[^1] From the second perspective, Plank's law describes the energy of a quantum as a function of wavelength.
+Radiation can be described as waves, with wavelength or frequency as properties, or based on quantum physics, as photons of specific energy. This "double personality" of light is important as each viewpoint provides a simpler explanation for different phenomena, such as refraction and reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell's equations.[^1] From the second perspective, Plank's law describes the energy of a quantum as inversely proportional to wavelength.
 
 [^1]: These equations are a system of four partial differential equations describing classical electromagnetism.
 
-The wavelength ranges of visible radiation and their usual names, based on human vision, are listed in Table [\[tab:Waverange\]](#tab:Waverange){reference-type="ref" reference="tab:Waverange"}. The colour ranges indicated in Table [\[tab:Waverange\]](#tab:Waverange){reference-type="ref" reference="tab:Waverange"} are an approximation, and we follow the ISO and CIE standards when applicable. Alternative definitions are in use, some of them applicable to plants. The electromagnetic spectrum is continuous with no clear boundaries between one colour and the next. Colours are the result of the interaction of different wavelengths of radiation with the photoreceptor pigments in the eye and the processing of the stimuli by the brain.
+The wavelength ranges of visible radiation, described by their colour based on human vision, are shown in @fig-wavebands-short. The colour ranges indicated in @fig-wavebands-short are one approximation out of several available. We follow the ISO and CIE standards when applicable. The electromagnetic spectrum is continuous with no clear boundaries between one colour and the next. Colours are the result of the interaction of different wavelengths of radiation with the photoreceptor pigments in the eye and the processing of the stimuli by the brain. Alternative definitions based on other sensory systems or energy capture systems are available, some of them applicable to plants.
 
 ```{r, echo=FALSE, warning=FALSE}
+#| label: fig-wavebands-short
+#| fig-cap: The solar spectrum, $280-900\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, human-vision colours according to ISO XXXXX, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, colours as frequently defined in plant photobiology (following Sellaro20xx and Smith19XX), and PAR (McCree 1971). 
 ggplot(normalise(sun_reference.mspct$ASTM.G173.global)) +
-  geom_line() +
+  geom_area(colour = "black", fill = "grey90") +
   stat_wb_box(w.band = VIS_bands("ISO"), ypos.fixed = 2, colour = "grey80", box.height = 0.2) +
   stat_wb_label(w.band = VIS_bands("ISO"), ypos.fixed = 2, colour = "white", angle = 90, size = 2) +
   stat_wb_box(w.band = c(UV_bands("ISO"), IR_bands("ISO")), ypos.fixed = 1.8, colour = "grey80", box.height = 0.2) +
@@ -35,13 +38,18 @@ ggplot(normalise(sun_reference.mspct$ASTM.G173.global)) +
   stat_wb_label(w.band = Plant_bands("CIE"), ypos.fixed = 1.2, colour = "white", angle = 90, size = 2) +
   scale_fill_identity() +
   scale_y_s.e.irrad_continuous(breaks = c(0, 0.5, 1), normalized = 531) +
-  scale_x_wl_continuous(limits = c(280, 900)) +
+  scale_x_wl_continuous(limits = c(280, 900),
+                        sec.axis = sec_axis_energy_eV()) +
   theme_minimal()
 ```
 
+Different regions or *wavebands* of UV and IR radiation are also shown in @fig-wavebands-short, but only in the proximity of visible radiation. In @fig-wavebands-all they are shown for a wider range of wavelengths. It is important to keep in mind that the ISO and CIE definitions of the VIS and UV wavebands overlap. Thus, it is incorrect to sum VIS and UV irradiances, while the definitions of photosynthetically active radiation (PAR) and UV do not overlap. Especially in the IR region the subdivision is somewhat arbitrary and the boundaries used in the literature vary, with differences even between ISO and CIE standards.
+
 ```{r, echo=FALSE, warning=FALSE}
+#| label: fig-wavebands-all
+#| fig-cap: The solar spectrum, $250-3000\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, visible light according to ISO XXXXX and CIE, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, PAR (McCree1971) and ePAR (Zhen2021). 
 ggplot(normalise(trim_spct(sun_reference.mspct$ASTM.G173.global, range = c(100, NA), fill = 0))) +
-  geom_line() +
+  geom_area(colour = "black", fill = "grey90") +
   stat_wb_box(w.band = VIS("ISO"), ypos.fixed = 2, colour = "grey80", box.height = 0.2) +
   stat_wb_label(w.band = VIS("ISO"), ypos.fixed = 2, colour = "white", angle = 90, size = 2) +
   stat_wb_box(w.band = c(UV_bands("ISO"), IR_bands("ISO")), ypos.fixed = 1.8, colour = "grey80", box.height = 0.2) +
@@ -58,51 +66,40 @@ ggplot(normalise(trim_spct(sun_reference.mspct$ASTM.G173.global, range = c(100, 
   theme_minimal()
 ```
 
-Different regions or *wavebands* of UV and IR radiation, are also listed in Table [\[tab:Waverange\]](#tab:Waverange){reference-type="ref" reference="tab:Waverange"}. It is important to keep in mind that the ISO and CIE definitions of the VIS and UV wavebands overlap. Thus, it is incorrect to sum VIS and UV irradiances, while the definitions of photosynthetically active radiation (PAR) and UV do not overlap. Especially in the IR region the subdivision is somewhat arbitrary and the boundaries used in the literature vary, with differences even between ISO and CIE standards.
-
-The energy of a quantum of radiation in a vacuum, depends on the wavelength, $\lambda$, or frequency[^2], $\nu$, 
-
-$$q = h \cdot \nu = h \cdot \frac{c}{\lambda}$$ 
-
-with the Planck constant $h=6.626\times 10^{-34}\,\mathrm{J\,s}$ and speed of light in vacuum $c=2.998\times 10^{8}\,\mathrm{m}\,\mathrm{s}^{-1}$. When dealing with numbers of photons, the equation above can be extended by using Avogadro's number $N_\mathrm{A}=6.022\times 10^{23}$ mol$^{-1}$. Thus, the energy of one mole of photons, $q^\prime$, is 
-
-$$q^\prime = h^\prime \cdot \nu = h^\prime \cdot \frac{c}{\lambda}$$ 
-with $h'=h\cdot N_\mathrm{A}=3.990\times 10^{-10}\,\mathrm{J\,s\,mol}^{-1}$. 
-
-The two equations above, are valid for all kinds of electromagnetic waves.
- 
-:::callout-note
-# examples
-
-**Example 1:** red light at 600 nm has about 200 kJ mol$^{-1}$, therefore, 1 $\mu$mol photons has 0.2 J. **Example 2:** radiation at 300 nm has about 400  kJ mol$^{-1}$, therefore, 1 $\mu$mol photons has 0.4 J.
-:::
+The energy of a quantum of radiation in a vacuum, depends on the wavelength, $\lambda$, or frequency[^2], $\nu$,
 
 [^2]: Wavelength and frequency are related to each other by the speed of light, according to $\nu = c / \lambda$ where $c$ is speed of light in vacuum. Consequently there are two equivalent formulations for the equations.
 
+$$q = h \cdot \nu = h \cdot \frac{c}{\lambda}$$
 
-## Interactions of Light and Matter
+with the Planck constant $h=6.626\times 10^{-34}\,\mathrm{J\,s}$ and speed of light in vacuum $c=2.998\times 10^{8}\,\mathrm{m}\,\mathrm{s}^{-1}$. When dealing with numbers of photons, the equation above can be extended by using Avogadro's number $N_\mathrm{A}=6.022\times 10^{23}$ mol$^{-1}$. Thus, the energy of one mole of photons, $q^\prime$, is
 
-The processes responsible for the variation of the radiance $L(\lambda,\theta,\phi)$ as the radiation beam travels through any kind of material, are primarily absorption $a$ and scattering $b$, which are called inherent optical properties, because they depend only on the characteristics of the material itself and are independent of the light field. Radiance is added to the directly transmitted beam, coming from different directions, due to elastic scattering, by which a photon changes direction but not wavelength or energy level. An example of this is Raleigh scattering in very small particles, which causes the scattering of light in a rainbow. A further gain of radiance into the direct path is due to inelastic processes like fluorescence, where a photon is absorbed by the material and reemitted as a photon with a longer wavelength and lower energy level, and Raman scattering. The elastic and inelastic scattered radiance is denoted as $L^E$ and $L^I$, respectively. Internal sources of radiances, $L^S$, like bioluminescence of biological organisms or cells contribute also to the detected radiance. The path of the radiance through a thin horizontal layer with thickness d$z=z_1-z_0$ is shown schematically in Figure [\[fig_radtrans\]](#fig_radtrans){reference-type="ref" reference="fig_radtrans"}.
+$$q^\prime = h^\prime \cdot \nu = h^\prime \cdot \frac{c}{\lambda}$$ with $h'=h\cdot N_\mathrm{A}=3.990\times 10^{-10}\,\mathrm{J\,s\,mol}^{-1}$.
 
-::: figure*
-::: center
-::: picture
-(10,6) (0,1)(1,0)10 (0,5)(1,0)10 (7,1)(1,-1)1 (2,6)(1,-1)1 (3,5)(1,-1)4 (4,4) (6,2) (4,4)(1,1)0.53 (4,4)(1,0)0.75 (4,4)(-1,0)0.75 (4,4)(-1,-1)0.53 (5.1,2)(1,0)0.75 (6.6,2.6)(-1,-1)0.53 (6,2)(1,-1)0.75 (0,0.7)$z_1$(0,4.7)$z_0$ (3.25,5.7)Incoming radiance (3.25,5.2)$L(\theta,\phi)$ (5,4.5)Loss by absorption $a$ (5,4)and scattering $b$ (7,3)Gain by elastic (7,2.5)scattered radiance (7,2)$L^E$ into the path (0.25,2.25)Gain by inelastic scattered (0.25,1.75)radiance $L^I$ and internal (0.25,1.25)sources $L^S$ into the path (4.2,0.6)Outgoing radiance (4.2,0.1)$L(\theta,\phi)$
-:::
-:::
+The two equations above, are valid for all kinds of electromagnetic waves.
+
+::: callout-tip
+# examples
+
+**Example 1:** red light at 600 nm has about 200 kJ mol$^{-1}$, therefore, 1 $\mu$mol photons has 0.2 J. **Example 2:** radiation at 300 nm has about 400 kJ mol$^{-1}$, therefore, 1 $\mu$mol photons has 0.4 J.
 :::
 
 ## Angle of Incidence
 
-Most frequently we describe the flux of radiation on a plane, usually, but not always a horizontal plane. This called *irradiance* and expressed per unit area and unit time. The area used as a reference is that of the receiving plane. This plane is located in three-dimensional (3D) space and when considering a point source of radiation the angle between the light beam and the receiving plane or surface affects the flux of radiation.
+Most frequently we describe the flux of radiation on a plane, usually, but not always a horizontal plane [@fig-cosine]. This called *irradiance* and expressed per unit area and unit time. The area used as a reference is that of the receiving plane. Fluence rate is measured on the surface of a sphere instead of a plane. This plane is located in three-dimensional (3D) space and when considering a point source of radiation, the angle, $\alpha$, between the light beam and the receiving plane or surface affects the received irradiance. Both irradiance and fluence rate are fluxes of radiation, expressed per unit area and unit time [@fig-cosine]. 
 
-The sun, can be assumed to be a point source (the solar disk is $\approx 1 ^\circ$ in diameter when seen from Earth), and changes in distance small relative to the total Sun to Earth distance, ignored. Thus, we have to consider only the angle of incidence @fig-cosine. For a given light source the maximum irradiance is that received on a plane normal to the light beam. As the angle between the beam and the surface becomes shallower, the irradiance measured on the plane decreases, reaching zero, when the beam is parallel to the surface. The relationship between the normal area and that at shallower angle is given by the cosine of the angle. When considering the sun, if the receiving plane is horizontal, the angle of interest is the solar elevation (1 - zenith angle). If the plane is not horizontal, the angle between the plane and the light beam depends both the the zenith angle and the azimuth angle of the sun's position, and the effective angle needs to be computed in three dimensions.
+![The concepts of irradiance and fluence rate explained. (A) A beam of radiation perpendicular to the plane of an irradiance sensor; irradiance and fluence rate have the same numerical value. (B) Radiation beam at an angle to the irradiance sensor; irradiance has a smaller numerical value than fluence rate. (C) Perfectly diffuse radiation from the hemisphere above the irradiance sensor; the numerical value of irradiance is one half that of fluence rate. (D) Perfectly diffuse radiation from both hemispheres, both above and below the sensors; the numerical value of irradiance is one quarter that of fluence rate. A spherical sensor (left) measures fluence rate, and a one-sided planar sensor (right) measures irradiance. In (A) and (B) radiation is collimated and represented by parallel arrows. In (C) and (D) radiation is diffuse and represented by “randomly” oriented arrows. In (A),
+(B) and (C) the shaded hemisphere of the spherical sensor is grey.](figures/cosine_arrows.png){#fig-cosine fig-alt="Diagram" fig-align="center" width="100%"}
+
+The sun, can be assumed to be a point source (the solar disk is $\approx 1 ^\circ$ in diameter when seen from Earth). Changes in distance that are of interest when studying plants are extremely small relative to the total Sun to Earth distance and can be ignored. Thus, in the case of direct sunlight, we have to consider only the angle of incidence. For a given light source the maximum irradiance is that received on a plane normal to the light beam [@fig-cosine]. As the angle between the beam and the surface becomes shallower, the irradiance measured on the plane decreases, reaching zero, when the beam is parallel to the surface. The relationship between the normal area and that at a shallower angle is given by the cosine of the angle $\alpha$. When considering the sun, if the receiving plane is horizontal, the angle of interest is the zenith angle (1 - solar elevation angle) [@fig-azimuth]. If the plane is not horizontal, the angle between the plane and the light beam depends both the the zenith angle and the azimuth angle of the sun's position, and the effective angle needs to be computed in three dimensions.
+
+![Asimuth and elevation (= Altitude) angles (**diagram to be redrawn or edited!**). If the plane on which irradiance is measured is horizontal, the Azimuth angle does not affect the incident angle, and it is enough to only take into account the elevation angle. _By TWCarlson_ - Azimut altitude.svg, CC BY-SA 3.0 [file at wikimedia.org](https://commons.wikimedia.org/w/index.php?curid=17727911).](figures/Azimuth-Altitude_schematic.svg){#fig-azimuth fig-align="center"}
 
 Obviously, the discussion above ignored scattered radiation from the sky. One approach to the simulation of the light field when multiple sources or sources with a large emitting area are present, is to use ray tracing, which is essentially a divide and conquer approach.
 
-When we considered a point source like an LED or light small light bulb at a relatively short distance from the receiving plane, distance cannot be ignored, as the illuminated area increases four times for each doubling in the distance. Thus, each doubling in distance decreases irradiance by 75%.
+When we considered _a point source_ like a bare LED chip or light from a small light bulb at a relatively short distance from the receiving plane, distance cannot be ignored as done above for the sun, as the illuminated area increases four times for each doubling in the distance. Thus, each doubling in distance decreases irradiance by 75%.
 
-In the case of light sources of a large surface or light beams focused by a lens or reflector, the rate of increase in area is smaller than for a point source. The extreme case is a highly collimated laser beam, for which the illuminated area increases very slowly with increasing distance.
+In the case of light sources with a large surface relative to the illuminated area or light beams focused by a lens or reflector, the rate of increase in area is smaller than for a point source. The extreme case is a highly collimated laser beam, for which the illuminated area increases very slowly with increasing distance. The irradiance, in these cases, is frequently not uniform within the illuminated area, with in most cases higher iradiance at the centre than at the edges of the illuminated area.
 
 ::: callout-tip
 Using a lens or reflector to make a light beam narrower makes it possible to increase irradiance by concentrating the light energy onto a smaller illuminated area, and this effect can be quantitatively large. Alternatively, the narrower beam makes it possible to move the light source away from the illuminated object maintaining the same irradiance. This can provide additional space for other equipment, or when using selective reflectors that transmit infrared radiation and only reflect VIS and/or UV radiation reduce the heat load on the illuminated object.
@@ -113,13 +110,54 @@ In a perfectly collimated beam, the photons follow parallel trajectories. In a b
 ::: callout-note
 # Angle of Incidence in 3D
 
-While in above, we had the sensor or observer at the centre, and the light source located on an imaginary sphere, here, instead, we locate the point light source at the centre of the sphere. So, when a beam or the radiation passing into a space or sphere is analysed, two important parameters are necessary: the distance to the source and the position of the measurement plane---i.e., if the receiving surface is perpendicular to the beam or at a shallower angle. The geometry is illustrated in Figure [\[fig_space\]](#fig_space){reference-type="ref" reference="fig_space"}. The radiation is received at distance $r$ by a surface of area d$A$, tilted by an angle $\alpha$ to the unit sphere's surface element, a solid angle, d$\Omega$, which is a two-dimensional angle in a space. The relation between d$A$ and d$\Omega$ in spherical coordinates is geometrically explained in Figure [\[fig_space\]](#fig_space){reference-type="ref" reference="fig_space"}.
+While in above, we had the sensor or observer at the centre, and the light source located on an imaginary sphere, here, instead, we locate the point light source at the centre of the sphere. So, when a beam or the radiation passing into a space or sphere is analysed, two important parameters are necessary: the distance to the source and the position of the measurement plane---i.e., if the receiving surface is perpendicular to the beam or at a shallower angle. The geometry is illustrated in @fig-space. The radiation is received at distance $r$ by a surface of area d$A$, tilted by an angle $\alpha$ to the unit sphere's surface element, a solid angle, d$\Omega$, which is a two-dimensional angle in a space. The relation between d$A$ and d$\Omega$ in spherical coordinates is geometrically explained in @fig-space.
 
-::: figure*
-![image](figures/sphere_highres.pdf){width="0.8\\myfigwidth"}
+![Definition of the solid angle dΩ and the geometry of areas in the space (redrawn after Eichler et al., 1993), where the given solid angle dΩ remains the same, regardless of distance r , while the exposed area exemplified by dA will change with distance r from the origin (light source) and the angle α, if the exposed area (or detector) is tilted. The angle denoted by φ is the azimuth angle and θ is the zenith angle.](figures/sphere.jpg){#fig-space fig-alt="Diagram" fig-align="center" width="67%"}
+
+The solid angle is calculated from the zenith angle $\theta$ and azimuth angle $\phi$, which denote the direction of the radiation beam
+
+$${\rm d}\Omega = {\rm d}\theta\cdot\sin\theta{\rm d}\phi \label{equ_dsolidangle}$$ The area of the receiving surface is calculated by a combination of the solid angle of the beam, the distance $r$ from the radiation source and the angle $\alpha$ of the tilt:
+
+$${\rm d}A  =  \frac{r{\rm d}\theta}{\cos\alpha}\cdot r\sin\theta{\rm d}\phi$$ which can be rearranged to
+
+$$\Rightarrow {\rm d}A  =  \frac{r^2}{\cos\alpha}\quad{\rm d}\Omega$$ Thus, the solid angle is given by
+
+$$\Omega = \int_A \frac{{\rm d}A\cdot\cos\alpha}{r^2} \label{equ_solidangle}$$ The unit of the solid angle is a steradian (sr). The solid angle of an entire sphere is calculated by integration of the equation above over the zenith ($\theta$) and azimuth ($\phi$) angles, $0\le\theta\le\pi(180^\circ)$ and $0\le\phi\le2\pi(360^\circ)$, and is $4\pi$ sr.
 :::
 
-The solid angle is calculated from the zenith angle $\theta$ and azimuth angle $\phi$, which denote the direction of the radiation beam $${\rm d}\Omega = {\rm d}\theta\cdot\sin\theta{\rm d}\phi \label{equ_dsolidangle}$$ The area of the receiving surface is calculated by a combination of the solid angle of the beam, the distance $r$ from the radiation source and the angle $\alpha$ of the tilt: $${\rm d}A  =  \frac{r{\rm d}\theta}{\cos\alpha}\cdot r\sin\theta{\rm d}\phi$$ which can be rearranged to $$\Rightarrow {\rm d}A  =  \frac{r^2}{\cos\alpha}\quad{\rm d}\Omega$$ Thus, the solid angle is given by $$\Omega = \int_A \frac{{\rm d}A\cdot\cos\alpha}{r^2} \label{equ_solidangle}$$ The unit of the solid angle is a steradian (sr). The solid angle of an entire sphere is calculated by integration of equation ([\[equ_dsolidangle\]](#equ_dsolidangle){reference-type="ref" reference="equ_dsolidangle"}) over the zenith ($\theta$) and azimuth ($\phi$) angles, $0\le\theta\le\pi(180^\circ)$ and $0\le\phi\le2\pi(360^\circ)$, and is $4\pi$ sr.
+## Interactions of Light and Matter
+
+Collimated light reflected from a mirror surface remains collimated, while its direction changes. Light reflected from a white surface is scattered, and if previously collimated, after being reflected it becomes more diffuse, i.e., it leaves the surface in multiple directions. A black surface does not reflect the incident light. A clear or transparent object transmits all the light incident on its surface, similarly to reflection from mirrors and white surfaces, a clear object can scatter the light passing through it or not. Real objects share some of the properties of these theoretical objects. The atmosphere is not perfectly clear and does partly scatter and partly absorb radiation, depending on the wavelength of the incoming or outgoing radiation. The same applies to water. In both cases, interactions take place as the light travels through them, as well as at the interface between media with different refractive index.
+
+Even if continuous, we can conceptually divide media into layers to describe the phenomena. Here we consider a layer between horizontal planes $z_0$ and $z_1$. The processes responsible for the variation of the radiance $L(\lambda,\theta,\phi)$ as the radiation beam travels through a material, are primarily absorption $a$ and scattering $b$, which are called inherent optical properties, because they depend only on the characteristics of the material itself and are independent of the light field. Radiance is added to the directly transmitted beam, coming from different directions, due to elastic scattering, by which a photon changes direction but not wavelength or energy level. An example of this is Raleigh scattering in very small particles, which causes the scattering of light in a rainbow. A further gain of radiance into the direct path is due to inelastic processes like fluorescence, where a photon is absorbed by the material and reemitted as a photon with a longer wavelength and lower energy level, and Raman scattering. The elastic and inelastic scattered radiance is denoted as $L^E$ and $L^I$, respectively. Internal sources of radiances, $L^S$, like bioluminescence of biological organisms or cells contribute also to the detected radiance. The path of the radiance through a thin horizontal layer with thickness d$z=z_1-z_0$ is shown schematically in @fig-radtrans.
+
+![Path of the radiance and influences of absorbing and scattering particles in a thin homogeneous horizontal layer of air or water. The layer is separated from other layers of different characteristics by boundary lines at height $z_0$ and $z_1$.](figures/light-path-radiance.png){#fig-radtrans fig-alt="Diagram" fig-align="center" width="67%"}
+
+At the boundary between two materials with different refractive index, the direction of the light bean changes, and depending on the difference in refractive index and the angle of incidence, a varying fraction of the incident light is reflected at the interface (@fig-refl-vs-angle).
+
+```{r, echo=FALSE}
+#| label: fig-refl-vs-angle
+#| fig-cap: Reflectance of a crown glass or acrylic pane in air as a function of the angle of incidence of light. The dark grey area under the dashed line describes the light reflected by the air to glass (or entrance) interface and the pale grey area describes the light reflected at the glass to air (or exit) interface and the solid line the sum of them. The minimum reflectance at the first interface is 4%. Computed based on a refractive index ($n$) difference of 1.5, ignoring the higher order reflections of light bouncing back and forth within the glass.
+
+refl_n.tb <- data.frame(angle = seq(from = 0, to = 90, length.out = 91))
+refl_n.tb$Rfr <- Rfr_from_n(angle_deg = refl_n.tb$angle)
+ggplot(refl_n.tb, aes(x = angle)) +
+  geom_area(aes(y = (1 - (1- Rfr)^2) * 100), fill = "grey90", colour = "black") +
+  geom_area(aes(y = Rfr * 100), fill = "grey80", colour = "black", linetype = "dashed") +
+  labs(x = "Light incidence angle (degrees from normal)",
+       y = "Reflectance of visible light (%)") +
+  theme_minimal()
+```
+
+::: callout-tip
+# Examples
+
+The fraction of the incident light reflected by the glass or plastic roof of a greenhouse depends on the angle of incidence of the light, making the orientation and inclination of the roof play an role important in determining the transmittance of daylight at different times of the day.
+
+The same applies to plastic films and sheets used to filter-out UV radiation in field experiemnts: the transmittance of the filters will vary during the course of the day, reflecting proportionally more PAR when the angle of incidence of sunlight is shallower.
+
+The surface of a water body reflects more light when the sun is low in the sky than at noon, at least if the surface of the water is horizontal and undisturbed by waves.
+
 :::
 
 ## Radiative Transfer
@@ -128,15 +166,23 @@ Putting all this together, the radiative transfer equation is $$\cos\theta\,\fra
 
 [^3]: Their program is available from the website of [Oregon Medical Laser Center](http://omlc.ogi.edu/software/mc/) at <http://omlc.ogi.edu/software/mc/>
 
-The other way to solve the radiative transfer equation is through the development of analytical parameterisations by making approximations for all the quantities needed. In this case, the result is not exact, but it has the advantage of fast computing and the analytical equations can be inverted just as fast. This leads to the idealised case of a source-free ($L^S=0$) and non-scattering media, i.e., $b=0$ and therefore $L^E=L^I=0$. Then, equation [\[equ_rte\]](#equ_rte){reference-type="ref" reference="equ_rte"} can be integrated easily and yields $$%L(z_1) = L(z_0)\cdot\exp\left\{-\frac{a\cdot(z_1-z_0)}{\cos\theta}\right\} \label{eq:Beer-Lambert}
-L(z_1) = L(z_0)\cdot \mathrm{e}^{-\frac{a\cdot(z_1-z_0)}{\cos\theta}} \label{eq:Beer-Lambert}$$ The boundary value $L(z_0)$ is presumed known. This result is known as Beer's law (or Lambert's law, Bouguer's law, Beer-Lambert law), denotes any instance of exponential attenuation of light and is exact only for purely absorbing media---i.e., media that do not scatter radiation. It is of direct application in analytical chemistry, as it describes the direct proportionality of absorbance ($A$) to the concentration of a coloured solute in a transparent solvent.
+The other way to solve the radiative transfer equation is through the development of analytical parameterisations by making approximations for all the quantities needed. In this case, the result is not exact, but it has the advantage of fast computing and the analytical equations can be inverted just as fast. This leads to the idealised case of a source-free ($L^S=0$) and non-scattering media, i.e., $b=0$ and therefore $L^E=L^I=0$. Then, equation XXXX can be integrated easily to yield 
 
-## Quantities
+$$L(z_1) = L(z_0)\cdot \mathrm{e}^{-\frac{a\cdot(z_1-z_0)}{\cos\theta}}$$
+
+The radiance value at the upper boundary, $L(z_0)$, is presumed known. This equation is known as Beer's law (or Lambert's law, Bouguer's law, Beer-Lambert law), and describes any instance of exponential attenuation of light and is exact only for purely absorbing media---i.e., media that do not scatter radiation. It is of direct application in analytical chemistry, as it describes the direct proportionality of absorbance ($A$) to the concentration of a "coloured" solute in a transparent solvent. True solutions are optically homogeneous, while suspensions and aerosols are not. The latter scatter light and their behaviour is different from that described by Beer's law. In chemistry, Beer's law is formulated in a simplified way by assuming a collimated light beam incident at 90 degrees 
+
+$$I_\lambda(z_1) = I_\lambda(z_0) \cdot \mathrm{e}^{-k_\lambda\cdot c\cdot l}$$
+where $I_\lambda(z_0)$ and $I_\lambda(z_1)$ are irradiances, $k_\lambda$ is the attenuation coefficient of the solute, $c$ is the concentration of the solute, and $l = z_1 - z_0$ is the path length. As the value of $k_\lambda$ is a function of wavelength, $\lambda$, how much $I$ is attenuated also depends on $\lambda$.
+
+## Radiation Quantities
+
+The amount of radiation can be quantified in different ways. Each quantity is useful in different circumstances. Quantities can describe flows (energy per unit time), flux rates (energy per unit time and unit area), exposure (energy per event and unit area), radiant flux (energy per unit time) and radiance (energy per unit area and solid angle). The shape of the receiving surface can be a plane, a sphere, a hemisphere or even a cylinder. In the case of radiance, the angle of acceptance of the sensor can also vary but usually narrow. These definitions are independent of wavelengths, but the quantities are in most cases used to describe energy integrated over a certain range of wavelengths based on the "named" wavebands shown in @fig-wavebands-short and @fig-wavebands-all. The definitions and symbols used for several physical quantities used to describe the "amount of radiation" are given in @tab-energy-quantites.
 
 ::: table*
 ::: center
 |                                                                 Symbol                                                                 |         Unit         | Description                                                                                                                                          |
-|:------------------------:|:---------------:|:-----------------------------|
+|:-----------------------:|:-----------------:|:----------------------------|
 |                                              $\Phi=\frac{\partial \quantum}{\partial t}$                                               |    W = J s$^{-1}$    | Radiant flux: absorbed or emitted energy per time interval                                                                                           |
 |                                            $\exposure=\frac{\partial \quantum}{\partial A}$                                            |      J m$^{-2}$      | Exposure: energy towards a surface area. (In plant research this is called usually *dose* (), while in Physics *dose* refers to absorbed radiation.) |
 |                                                $\irr=\frac{\partial \Phi}{\partial A}$                                                 |      W m$^{-2}$      | Irradiance: flux or radiation towards a surface area, radiant flux density                                                                           |
@@ -146,7 +192,7 @@ L(z_1) = L(z_0)\cdot \mathrm{e}^{-\frac{a\cdot(z_1-z_0)}{\cos\theta}} \label{eq:
 :::
 :::
 
-Different physical quantities are used to describe the "amount of radiation" and their definitions and abbreviations are listed in Table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}. Taking into account Equation [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and assuming a homogenous flux, the important correlation between irradiance $\irr$ and intensity $\intensity$ is $$E = \frac{\intensity \cdot \cos\alpha}{r^2} \label{equ_r2law}$$ The irradiance decreases by the square of the distance to the source and depends on the tilt of the detecting surface area. This is valid only for point sources. For outdoor measurements the sun can be assumed to be a point source. For artificial light sources simple LEDs (light-emitting diodes) without optics on top are also effectively point sources. However, LEDs with optics---and other artificial light sources with optics or reflectors designed to give a more focused dispersal of the light---deviate to various extents from the rule of a decrease of irradiance proportional to the square of the distance from the light source.
+ Taking into account Equation [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and assuming a homogenous flux, the important correlation between irradiance $\irr$ and intensity $\intensity$ is $$E = \frac{\intensity \cdot \cos\alpha}{r^2} \label{equ_r2law}$$ The irradiance decreases by the square of the distance to the source and depends on the tilt of the detecting surface area. This is valid only for point sources. For outdoor measurements the sun can be assumed to be a point source. For artificial light sources simple LEDs (light-emitting diodes) without optics on top are also effectively point sources. However, LEDs with optics---and other artificial light sources with optics or reflectors designed to give a more focused dispersal of the light---deviate to various extents from the rule of a decrease of irradiance proportional to the square of the distance from the light source.
 
 Besides the physical quantities used for all electromagnetic radiation, there are also equivalent quantities to describe visible radiation, so called photometric quantities. The human eye as a detector led to these photometric units, and they are commonly used by lamp manufacturers to describe their artificial light sources. See Box [\[box:photometric:quantities\]](#box:photometric:quantities){reference-type="ref" reference="box:photometric:quantities"} on page for a short description of these quantities and units.
 
@@ -161,7 +207,7 @@ When we are interested in photochemical reactions, the most relevant radiation q
 
 ::: center
 |                       Symbol                       |       Unit        | Description                                                                                                         |
-|:---------------:|:---------------:|:-------------------------------------|
+|:----------------:|:----------------:|:-----------------------------------|
 |                 $\Phi_\mathrm{p}$                  |     s$^{-1}$      | Photon flux: number of photons per time interval                                                                    |
 | $\pfd=\frac{\partial \Phi_\mathrm{p}}{\partial A}$ | m$^{-2}$ s$^{-1}$ | Photon irradiance: photon flux towards a surface area, photon flux density (sometimes also symbolised by $\irr[p]$) |
 |         $\qdose=\int_t\;\pfd\;\mathrm{d}t$         |     m$^{-2}$      | Photon exposure: number of photons towards a surface area during a time interval, photon fluence                    |
@@ -194,3 +240,18 @@ There are, in principle, two possible approaches to measuring radiation. The fir
 \end{aligned}$$ Depending on the shape of a detector (which may be either planar or spherical) the irradiance is called (plane) irradiance $\irr$ or fluence rate (also called scalar irradiance) $\flrat$. A planar sensor detects incoming photons depending on the incident angle and a spherical sensor detects all photons equally weighted for all directions. See section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page for a more detailed discussion.
 
 Here we have discussed the properties of light based on energy quantities. In photobiology there are good reasons to quantify radiation based on photons. See Box [\[box:quantum:quantities\]](#box:quantum:quantities){reference-type="ref" reference="box:quantum:quantities"} on page , and section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page .
+
+## Quantities Describing Light-Matter Interactions
+
+A, Afr, Tfr, Rfr, n (internal, total, specular, etc.)
+
+
+## Radiation and Energy Balances
+
+Above we discussed mainly optics, i.e., light from the perspective of the radiation and how its flow is altered by interactions with matter. The absorption of energy is also important from the perspective of objects and their temperature.
+
+
+
+## Radiation, Atoms and Molecules
+
+
