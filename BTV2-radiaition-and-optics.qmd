@@ -19,7 +19,7 @@ Radiation can be described as waves, with wavelength or frequency as properties,
 
 [^1]: These equations are a system of four partial differential equations describing classical electromagnetism.
 
-The wavelength ranges of visible radiation, described by their colour based on human vision, are shown in @fig-wavebands-short. The colour ranges indicated in @fig-wavebands-short are one approximation out of several available. We follow the ISO and CIE standards when applicable. The electromagnetic spectrum is continuous with no clear boundaries between one colour and the next. Colours are the result of the interaction of different wavelengths of radiation with the photoreceptor pigments in the eye and the processing of the stimuli by the brain. Alternative definitions based on other sensory systems or energy capture systems are available, some of them applicable to plants.
+The wavelength ranges of visible radiation, described by their colour based on human vision's response to monochromatic light, are shown in @fig-wavebands-short, topmost bar of wavebands. The colour ranges indicated in @fig-wavebands-short are one approximation out of several available. We follow the ISO and CIE standards when applicable. The electromagnetic spectrum is continuous with no clear boundaries between one colour and the next. Colours are the result of the interaction of different wavelengths of radiation with the photoreceptor pigments in the eye and the processing of the stimuli by the brain. Alternative definitions based on other sensory systems or energy capture systems are available, some of them applicable to plants are shown in @fig-wavebands-short, two lowermost bars of wavebands.
 
 ```{r, echo=FALSE, warning=FALSE}
 #| label: fig-wavebands-short
@@ -110,7 +110,7 @@ In a perfectly collimated beam, the photons follow parallel trajectories. In a b
 ::: callout-note
 # Angle of Incidence in 3D
 
-While in above, we had the sensor or observer at the centre, and the light source located on an imaginary sphere, here, instead, we locate the point light source at the centre of the sphere. So, when a beam or the radiation passing into a space or sphere is analysed, two important parameters are necessary: the distance to the source and the position of the measurement plane---i.e., if the receiving surface is perpendicular to the beam or at a shallower angle. The geometry is illustrated in @fig-space. The radiation is received at distance $r$ by a surface of area d$A$, tilted by an angle $\alpha$ to the unit sphere's surface element, a solid angle, d$\Omega$, which is a two-dimensional angle in a space. The relation between d$A$ and d$\Omega$ in spherical coordinates is geometrically explained in @fig-space.
+While in Figure XXXX above, we had the sensor or observer at the centre, and the light source located on an imaginary sphere, here, instead, we locate the point light source at the centre of the sphere. So, when a beam or the radiation passing into a space or sphere is analysed, two important parameters are necessary: the distance to the source and the position of the measurement plane---i.e., if the receiving surface is perpendicular to the beam or at a shallower angle. The geometry is illustrated in @fig-space. The radiation is received at distance $r$ by a surface of area d$A$, tilted by an angle $\alpha$ to the unit sphere's surface element, a solid angle, d$\Omega$, which is a two-dimensional angle in a space. The relation between d$A$ and d$\Omega$ in spherical coordinates is geometrically explained in @fig-space.
 
 ![Definition of the solid angle dΩ and the geometry of areas in the space (redrawn after Eichler et al., 1993), where the given solid angle dΩ remains the same, regardless of distance r , while the exposed area exemplified by dA will change with distance r from the origin (light source) and the angle α, if the exposed area (or detector) is tilted. The angle denoted by φ is the azimuth angle and θ is the zenith angle.](figures/sphere.jpg){#fig-space fig-alt="Diagram" fig-align="center" width="67%"}
 
@@ -133,7 +133,9 @@ Even if continuous, we can conceptually divide media into layers to describe the
 
 ![Path of the radiance and influences of absorbing and scattering particles in a thin homogeneous horizontal layer of air or water. The layer is separated from other layers of different characteristics by boundary lines at height $z_0$ and $z_1$.](figures/light-path-radiance.png){#fig-radtrans fig-alt="Diagram" fig-align="center" width="67%"}
 
-At the boundary between two materials with different refractive index, the direction of the light bean changes, and depending on the difference in refractive index and the angle of incidence, a varying fraction of the incident light is reflected at the interface (@fig-refl-vs-angle).
+At the boundary between two materials with different refractive index, the direction of the light beam changes, and depending on the difference in refractive index and the angle of incidence, a varying fraction of the incident light is reflected at the interface (@fig-refl-vs-angle). On a flat surface like a glass plate or polished metal surface the applicable equation for specular reflection is that in equation XXXX. 
+
+**equation here**
 
 ```{r, echo=FALSE}
 #| label: fig-refl-vs-angle
@@ -144,6 +146,7 @@ refl_n.tb$Rfr <- Rfr_from_n(angle_deg = refl_n.tb$angle)
 ggplot(refl_n.tb, aes(x = angle)) +
   geom_area(aes(y = (1 - (1- Rfr)^2) * 100), fill = "grey90", colour = "black") +
   geom_area(aes(y = Rfr * 100), fill = "grey80", colour = "black", linetype = "dashed") +
+  scale_x_continuous(breaks = c(0, 30, 60, 90)) +
   labs(x = "Light incidence angle (degrees from normal)",
        y = "Reflectance of visible light (%)") +
   theme_minimal()
@@ -174,6 +177,15 @@ The radiance value at the upper boundary, $L(z_0)$, is presumed known. This equa
 
 $$I_\lambda(z_1) = I_\lambda(z_0) \cdot \mathrm{e}^{-k_\lambda\cdot c\cdot l}$$
 where $I_\lambda(z_0)$ and $I_\lambda(z_1)$ are irradiances, $k_\lambda$ is the attenuation coefficient of the solute, $c$ is the concentration of the solute, and $l = z_1 - z_0$ is the path length. As the value of $k_\lambda$ is a function of wavelength, $\lambda$, how much $I$ is attenuated also depends on $\lambda$.
+
+::: callout-tip
+# Radiation transfer models
+
+Radiation transfer models like TUV and libradtran simulate the modifying effect of the atmosphere on extraterrestrial solar spectral irradiance to estimate the daylight spectrum at ground level or at different elevattions. They additional compute the effect of the surface albedo.
+
+Both [libradtran](https://www.libradtran.org/) and [TUV](https://www2.acom.ucar.edu/modeling/tuv-download) models can be installed and run locally, while a simplified interactive on-line application [Quick TUV Calculator](https://www.acom.ucar.edu/Models/TUV/Interactive_TUV/) is available. R package 'photobiologyInOut' can import data generated by these models into R objects. R package 'forqat' can do simulation with TUV, either locally installed or using the Quick TUV API, directly from within R.
+
+:::
 
 ## Radiation Quantities
 
@@ -213,9 +225,9 @@ When we are interested in photochemical reactions, the most relevant radiation q
 |         $\qdose=\int_t\;\pfd\;\mathrm{d}t$         |     m$^{-2}$      | Photon exposure: number of photons towards a surface area during a time interval, photon fluence                    |
 :::
 
-These quantities can be also used based on a 'chemical' amount of moles by dividing the quantities by Avogadro's number $N_A=6.022\times 10^{23}$ mol$^{-1}$. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e. divided by the energy of a single photon at each wavelength as defined in equation [\[equ_energy\]](#equ_energy){reference-type="ref" reference="equ_energy"}. This yields for example $$\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\cdot\frac{\partial\quantum}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}\pfd(\lambda) = \frac{\lambda}{h\;c}\cdot E(\lambda)$$ When dealing with bands of wavelengths, for example an integrated value like from 400 to 700 nm, it is necessary to repeat these calculations at each wavelength and then integrate over the wavelengths. For example, the photon irradiance or in moles of photons is obtained by $$\PPFD = \frac{1}{N_\mathrm{A}}\int_{400\;\mathrm{nm}}^{700\,\mathrm{nm}}\frac{\lambda}{hc}\;E(\lambda)\;\mathrm{d}\lambda$$ For integrated values of or radiation the calculation is done analogously by integrating from 280 to 315 nm or 315 to 400 nm, respectively.
+These quantities can be also used based on a 'chemical' amount of moles by dividing the quantities by Avogadro's number $N_A=6.022\times 10^{23}$ mol$^{-1}$. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e., divided by the energy of a single photon at each wavelength as defined in equation [\[equ_energy\]](#equ_energy){reference-type="ref" reference="equ_energy"}. This yields for example $$\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\cdot\frac{\partial\quantum}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}\pfd(\lambda) = \frac{\lambda}{h\;c}\cdot E(\lambda)$$ When dealing with bands of wavelengths, for example an integrated value like from 400 to 700 nm, it is necessary to repeat these calculations at each wavelength and then integrate over the wavelengths. For example, the photon irradiance or in moles of photons is obtained by $$\PPFD = \frac{1}{N_\mathrm{A}}\int_{400\;\mathrm{nm}}^{700\,\mathrm{nm}}\frac{\lambda}{hc}\;E(\lambda)\;\mathrm{d}\lambda$$ For integrated values of or radiation the calculation is done analogously by integrating from 280 to 315 nm or 315 to 400 nm, respectively.
 
-If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given in the table below. For , 1 of "average daylight" is approximately 4.6 . This is exact only if the radiation is equal from 400 to 700 nm, because the factor is the value at the central wavelength at 550 nm. Further details are discussed in section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page .
+If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given in the table below. For , 1 of "average daylight" is approximately 4.6. This is exact only if the radiation is equal from 400 to 700 nm, because the factor is the value at the central wavelength at 550 nm. Further details are discussed in section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page .
 
 **Table.** Conversion factors of photon and energy quantities at different wavelengths.
 
@@ -242,6 +254,10 @@ There are, in principle, two possible approaches to measuring radiation. The fir
 Here we have discussed the properties of light based on energy quantities. In photobiology there are good reasons to quantify radiation based on photons. See Box [\[box:quantum:quantities\]](#box:quantum:quantities){reference-type="ref" reference="box:quantum:quantities"} on page , and section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page .
 
 ## Quantities Describing Light-Matter Interactions
+
+### Reflectance
+
+Adapt Gates, D (1980) Figure 8.35.
 
 A, Afr, Tfr, Rfr, n (internal, total, specular, etc.)
 
