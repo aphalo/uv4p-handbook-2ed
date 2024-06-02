@@ -207,69 +207,6 @@ Photosynthetically active radiation, CIE's erythemal exposures, and many other "
 
 ### Reflection
 
-<<<<<<< Updated upstream
-Collimated light reflected from a mirror surface remains collimated, while its direction changes. Light reflected from a white surface is scattered, and if previously collimated, after being reflected it becomes more diffuse, i.e., it leaves the surface in multiple directions. A black surface does not reflect the incident light. A clear or transparent object transmits all the light incident on its surface, similarly to reflection from mirrors and white surfaces, a clear object can scatter the light passing through it or not. Real objects share some of the properties of these theoretical objects. The atmosphere is not perfectly clear and does partly scatter and partly absorb radiation, depending on the wavelength of the incoming or outgoing radiation. The same applies to water. In both cases, interactions take place as the light travels through them, as well as at the interface between media with different refractive index.
-
-At the boundary between two materials with different refractive index, the direction of the light beam changes, and depending on the difference in refractive index and the angle of incidence, a varying fraction of the incident light is reflected at the interface (@fig-refl-vs-angle). On a flat surface like a glass plate or polished metal surface the applicable equation is that derived from Snell's law, which mathematically is given by
-
-$$n_1 \times sin(\theta_1) = n_2 \times sin(\theta_2)$$
-
-where $n_1$ and $n_2$ are the refractive indexes of two materials, such as air and glass, and $\theta_1$ and $\theta_2$ and the refraction angles.
-
-Reflectance can be estimated from the difference in refractive index and the angle of incidende of the light onto the plane of the interface. Reflectance depends on the contribution of $s$ and $p$ polarised components.
-
-
-$$R_p = \left(\frac{n^2 \times \cos(\theta) - \sqrt{n^2 - \sin(\theta)^2}}
-{n^2 \times \cos(\theta) + 
-        \sqrt{n^2 - \sin(\theta)^2}}\right)^2$$
-        
-and 
-
-$$R_s = \left(\frac{\cos(\theta) - \sqrt{n^2 - \sin(\theta)^2}}
-{\cos(\theta) + 
-        \sqrt{n^2 - \sin(\theta)^2}}\right)^2$$
-        
-Combining both formulas above, weighted based on the contributions of $p$ and $s$ components. The reflectance of a single interface can be calculated as
-
-$$R = R_p \times f_p + R_s \times f_s$$
-
-with $f_p + f_s = 1$, for the fraction of the radiation with $p$ and $s$ polarization planes. Using these equations, the reflectance at a glass window in contact with air of both sides can be computed. The refractive index of air is 1 and that of glass 1.5, so reflectance for a relative refractive index of $n = 1.5$ is shown in @fig-refl-vs-angle simulates a single and a double interface.
-
-The reflectance for two surfaces can be computed taking into account multiple back and forth reflections within the glass pane as well as its internal absorbance, or _approximated_ ignoring them, as in @fig-refl-vs-angle. For a clear glass pane the error is not too large, but for some other materials could cause significant bias in the estimates.
-
-```{r, echo=FALSE}
-#| label: fig-refl-vs-angle
-#| fig-cap: Reflectance of a crown glass or acrylic pane in air as a function of the angle of incidence of light. The dark grey area under the dashed line describes the light reflected by the air to glass (or entrance) interface and the pale grey area describes the light reflected at the glass to air (or exit) interface and the solid line the sum of them. The minimum reflectance at the first interface is 4%. Computed based on a relative refractive index ($n$) of 1.5, ignoring the higher order reflections of light bouncing back and forth within the glass.
-
-refl_n.tb <- data.frame(angle = seq(from = 0, to = 90, length.out = 91))
-refl_n.tb$Rfr <- Rfr_from_n(angle_deg = refl_n.tb$angle)
-ggplot(refl_n.tb, aes(x = angle)) +
-  geom_area(aes(y = (1 - (1- Rfr)^2) * 100), fill = "grey90", colour = "black") +
-  geom_area(aes(y = Rfr * 100), fill = "grey80", colour = "black", linetype = "dashed") +
-  scale_x_continuous(breaks = c(0, 30, 60, 90)) +
-  labs(x = "Light incidence angle (degrees from normal)",
-       y = "Reflectance of visible light (%)") +
-  theme_minimal()
-```
-
-::: callout-tip
-# Practical examples
-
-The fraction of the incident light reflected by the glass or plastic roof of a greenhouse depends on the angle of incidence of the light, making the orientation and inclination of the roof play an important role in determining the transmittance of daylight at different times of the day and seasons of the year.
-
-The same applies to plastic films and sheets used to filter-out UV radiation in field experiments: the transmittance of the filters will vary reflecting proportionally more PAR and UV radiation when the angle of incidence of sunlight is shallower.
-
-The surface of a water body reflects more light when the sun is low in the sky than at noon, at least if the surface of the water is horizontal and undisturbed by waves.
-
-:::
-
-On a rough surface, different points of the receiving surface are at different angles, thus the equations above do not apply to the angle between the light beam and the plate as a whole. In addition, inclusions like air bubbles and small particles of a material with a different $n$ than the material matrix create additional interfaces within the plate. In all these cases, different photons are reflected at different angles, scattering the light. These are some of the properties used for making diffusive plates from clear materials. In a perfect diffuser internal absorptance $A_i = 0$, and half of the photons exit from each face of the plate.
-
-::: callout-tip
-# Biological example
-
-Similarly to man-made diffusers, multiple air-water interfaces are encountered by light within in the interior of leaves and other plant organs. These interactions scatter the light, increasing the opportunities for photons to be absorbed as they follow a complex back and forth path. While green leaves strongly absorb visible light, in the far-red region leaves are nearly perfect diffusers.
-=======
 Collimated light reflected from a mirror surface remains collimated, while its direction changes. Light reflected from a white surface is scattered, and if previously collimated, after being reflected it becomes more diffuse, i.e., it leaves the surface in multiple directions. A black surface does not reflect the incident light, it absorbs it. A clear or transparent object transmits all the light incident on its surface, similarly to reflection from mirrors and white surfaces, a clear object can scatter the light passing through it or not. Real objects share some of the properties of these theoretical objects. For example, the atmosphere is not perfectly clear and does partly scatter and partly absorb radiation, depending on the wavelength of the incoming or outgoing radiation. The same applies to water. In both cases, interactions take place as the light travels through them, as well as at the interface between media with different refractive index.
 
 Specular reflection, like in a mirror, affects the angle of the beam consitently, thus, preserving the image. Diffuse reflection consists in scattered light, thus the image is not preserved, light on a white matte wall [@fig-reflection]. The sum of specular and diffuse reflection is called total reflection.
@@ -355,6 +292,13 @@ theme_minimal()
 ```
 
 On a rough surface, different points of the receiving surface are at different angles to the light beam, thus the equations above do not apply to the angle between the light beam and the plate as a whole. In addition, inclusions like air bubbles and small particles of a material with a different $n$ than the material matrix create additional interfaces within the plate. In all these cases, different photons are reflected at different angles, scattering the light. These are some of the properties used for making diffusive plates from clear materials. In a perfect diffuser internal absorptance $A_i = 0$, and half of the incoming photons exit from each face of a thin plate.
+
+::: callout-note
+# Refractive index
+
+The refractive index, $n$, is a property of a material, but we must remember that, for example, corrosion of the surface of a metal plate, changes the material at the interface with air into an oxide. Thus, the corresponding value of $n$ also changes. Furthermore, corrosion of a polished metal surface frequently increases roughness, and thus scattering of the reflected light can also increase.
+
+:::
 
 When the material does not absorb any of the photons travelling through it, i.e., its internal absorptance $A_i = 0$, and consequently, its internal transmittance $T_i = 1$, total transmittance is given by $T_t = 1 - R_t$, where $R_t$ is the total reflectance.
 
@@ -455,129 +399,19 @@ A _pigment_ is a light absorbing chemical or biochemical molecule. Which wavelen
 |:----------------:|:----------------:|:-----------------------------------|
 | $R^\mathrm{tot}$ | fraction         | Total reflectace:                  |
 | $R^\mathrm{spcl}$ | fraction        | Specular reflectace:               |
+| $R^\mathrm{diff}$ | fraction        | Diffuse reflectace:               |
 | $n$              | numeric        | Refractive index:                    |
 | $T^\mathrm{tot}$ | fraction         | Total transmittance:               |
 | $T^\mathrm{int}$ | fraction        | Internal transmittance:             |
 | $Afr$            | fraction         | Absorptance:               |
 | $A$              | fraction         | Absorbance:               |
-| $xxx$            |                  | Molar 
+| $xxx$            |                  | Molar attenuation:
+:::
 :::
 
 As for radiation a table with symbols, equations, units and definitions.
->>>>>>> Stashed changes
-
-This contribution of scattering can be visualized by infiltrating leaves with water in a vaccum chamber. This fills the air spaces, decreasing scattering and making leaves semitransparent. If this is done on albino leaves they become nearly transparent.
-
-**It would be nice to take photographs. I have done this easily more than 40 years ago with variegated English ivy leaves, but currently I lack a vaccum chamber. (We could ask Justyna if they can do this trick).**
-
-:::
-
-When the material does not absorb any of the photons travelling through it, i.e., its internal absorptance $A_i = 0$, and consequently, its internal transmittance $T_i = 1$, total transmittance is given by $T_t = 1 - R_t$, where $R_t$ is the total reflectance.
-
-Many materials do absorb photons as they travel through them. The proportion of the photons incident at the surface that are absorbed depends on the distance travelled within the medium, thus a gradient is created along the light path. In the simple case of a light beam normal to the surface of a non scattering material, such as a true solution in a cuvette, the length of the path is given by the thickness of the ``plate´´. 
-
-![Refraction alters the angle of the beam, creating reflection but also displaces the transmitted light beam, modifying the path length. [From Wiki Commons](https://commons.wikimedia.org/wiki/File:Beam-displacement-inv.svg)](figures/Beam-displacement-inv.svg){#fig-beam-displ}
-
-At shallower angles of incidence, the effective path becomes longer [@fig-beam-displ]. However, the angle used to compute the length of the path is not the angle of incidence $\alpha$ because refraction changes this angle into $\beta$. Specular reflectance takes place symmetrically to the incidence angle, at angle $\alpha^\prime$. The value of $\beta$ is dependent on $n$, for this example, $n = 1.36$.
-
-The refractive index, $n$, is dependent on wavelength $\lambda$. How strong is this dependency, depends on the material. The refractive index of air is $n = 0$. This dependency affects spectral reflectance [@fig-refl-from-n].
-
-```{r, echo=FALSE}
-#| label: fig-refl-from-n
-#| fig-cap: Spectral reflectance of different materials computed from the spectral refractive index $n_\lambda$ for an angle of incidence of $60^\circ$ away from the normal. Within each type of material $n_\lambda$ can vary and a result of oxydation of metal surfaces and additives and surface coatings on glass and plastic sheets. 
-
-autoplot(
-  reflector_mspct(
-    list(germanium = Rfr_from_n(angle_deg = 60, n = refractive_index.mspct[["Ge"]]),
-         nickel = Rfr_from_n(angle_deg = 60, n = refractive_index.mspct[["Ni"]]),
-         water = Rfr_from_n(angle_deg = 60, n = refractive_index.mspct[["water"]]),
-         titanium = Rfr_from_n(angle_deg = 60, n = refractive_index.mspct[["Ti"]]),
-         polycarbonate = Rfr_from_n(angle_deg = 60, n = refractive_index.mspct[["PC"]]))),
-  annotations = list(c("+", "boundaries"), c("-", "peaks", "boxes", "labels")),
-range = c(400, 1000)) +
-labs(linetype = "Material") +
-theme_minimal()
-```
-
-<<<<<<< Updated upstream
-
-
-
-### Attenuation
-
-Even if continuous, we can conceptually divide media into layers to describe how light is attenuated as photons travel through them. Here we consider a layer between horizontal planes $z_0$ and $z_1$, within the matrix of the medium. Thus, we can ignore refraction and reflectance at material interfaces. The processes responsible for the changes in the radiance $L(\lambda,\theta,\phi)$ as a radiation beam travels through a material, are primarily absorption $a$ and scattering $s$. These are "inherent optical processes", because they depend on the characteristics of the material itself and are independent of the light field. 
-
-Radiance is not only attenuated, it can also be added to the directly transmitted beam, coming from different directions, due to elastic scattering, by which a photon changes direction but not wavelength or energy level. An example of this is Raleigh scattering by very small particles, which causes the scattering of light in a rainbow. A further, wavelength-specific gain of radiance into the direct path is possible through inelastic processes like fluorescence, where a photon is absorbed by the material and reemitted as a photon with a longer wavelength and lower energy level, and through Raman scattering. The elastic and inelastic scattered radiances are denoted as $L^E$ and $L^I$, respectively. Internal sources of radiance, $L^S$, like bioluminescence of biological organisms or cells contribute also to the detected radiance. The path of the light beam through a thin horizontal layer with thickness $\Delta z=z_1-z_0$ is shown schematically in @fig-radtrans.
-
-![Path of the radiance and influences of absorbing and scattering particles in a thin homogeneous horizontal layer of air or water. The layer is separated from other layers of different characteristics by boundary lines at height $z_0$ and $z_1$.](figures/light-path-radiance.png){#fig-radtrans fig-alt="Diagram" fig-align="center" width="67%"}
-
-Putting together the different components described above, the radiative transfer equation is obtained
-$$\cos\theta\,\frac{{\rm d}L}{{\rm d}z} = -(a+s)\times L + L^E + L^I + L^S \label{equ_rte}$$
-The dependencies of $L$ on $\lambda$, $\theta$, and $\phi$ are omitted here for brevity. No exact analytical solution to the radiative transfer equation exists, hence it is necessary either to use numerical models or to use analytical approximations. 
-
-The parameters of the light field can be simulated by modelling the paths of photons, also called "ray tracing". For an infinite number of photons, the light field parameters reach their exact values asymptotically. The advantage of numerical simulation methods is a relatively simple structure of the program, but its disadvantage is the time-consuming computation involved. Details of the application of the Monte Carlo method to simulations are explained for example by @prahl89, @Wang1995[^3], or @moble94.
-
-[^3]: Their programs are available from the website of [Oregon Medical Laser Center](http://omlc.ogi.edu/software/mc/) at <http://omlc.ogi.edu/software/mc/>
-
-The other way to solve the radiative transfer equation is through the development of analytical approximations for all the quantities needed. In this case, the result is not exact, but it has the advantage of fast computation and that the analytical equations can be inverted easily. This leads to the idealised case of a source-free ($L^S=0$) and non-scattering media, i.e., $b=0$ and therefore $L^E=L^I=0$. Then, equation XXXX can be integrated easily to yield 
-
-$$L(z_1) = L(z_0)\times \mathrm{e}^{-\frac{a\cdot(z_1-z_0)}{\cos\theta}}$$
-
-The radiance value at the upper boundary, $L(z_0)$, is presumed known. This equation is known as Beer's law (or Lambert's law, Bouguer's law, Beer-Lambert law), and describes any instance of exponential attenuation of light and is exact only for purely absorbing media---i.e., media that do not scatter radiation. It is of direct application in analytical chemistry, as it describes the direct proportionality of absorbance ($A$) to the concentration of a "coloured" solute in a transparent solvent. True solutions are optically homogeneous, while suspensions and aerosols are not. The latter scatter light and their behaviour is different from that described by Beer's law. In chemistry, Beer's law is formulated in a simplified way by assuming a collimated light beam incident at 90 degrees 
-
-$$I_\lambda(z_1) = I_\lambda(z_0) \times \mathrm{e}^{-k_\lambda\times c\times l}$$
-where $I_\lambda(z_0)$ and $I_\lambda(z_1)$ are irradiances, $k_\lambda$ is the attenuation coefficient of the solute, $c$ is the concentration of the solute, and $l = z_1 - z_0$ is the path length. As the value of $k_\lambda$ is a function of wavelength, $\lambda$, how much $I$ is attenuated also depends on $\lambda$.
-
-This equation can be used to compute irradiance at any point in the path by varying $l$ if $k_\lambda$ and $c$ are known. In chemical analysis, the equation is used to estimate $c$ with $k_\lambda$ and $l$ known. For a valid estimate, all the quantities must be expressed in coherent units, and the solvent should not absorb photons in the wavelength range of interest. In practice, in most cases both the pure solvent and the solution are measured, and the effect of the solute obtained by difference. A calibration curve based on a dilution series of known concentrations is safest when the pure solute is available.
-
-Irradiance in a solution changes with path length following an exponential attenuation curve, i.e., the curve is asymptotic [@fig-Beer-Lambert].
-
-```{r, echo=FALSE}
-#| label: fig-Beer-Lambert
-#| fig-cap: Hypothetical light attenuation curve computed with the Beer-Lambert equation assuming $k \times c = 5$. This figure illustrates the shape of the curve, while the $z_i - z_0$ are arbitrary path lengths $l$.
-ggplot() +
-  xlim(0, 1) +
-  stat_function(fun = function(x) {1 * exp(-5 * x)}) +
-  labs(x = expression(italic(l[i]*`=`*z[i] - z[0])),
-       y = expression(italic(I(z[i])))) +
-  theme_minimal()
-```
-
-::: callout-note
-
-# Radiation transfer models
-
-Radiation transfer models like TUV and libradtran simulate the modifying effect of the atmosphere on extraterrestrial solar spectral irradiance to estimate the daylight spectrum at ground level or at different elevations within the atmosphere. Importantly, these models compute the effect of the surface albedo, aerosols, clouds and particles in the atmosphere.
-
-The output from both models can be either spectral irradiance or spectral radiance. They also estimate the direct and diffuse components, as well as the upwelling scattered radiation from the ground surface.
-
-Both [libradtran](https://www.libradtran.org/) and [TUV](https://www2.acom.ucar.edu/modeling/tuv-download) models can be installed and run locally, while a simplified interactive on-line application [Quick TUV Calculator](https://www.acom.ucar.edu/Models/TUV/Interactive_TUV/) is available. R package 'photobiologyInOut' can import data generated by these models into R objects. R package 'forqat' can do simulation with TUV, either locally installed or using the Quick TUV API, directly from within R.
-
-Radiation transfer models have also been developed for simulation of the within canopies as well as within leaves, such as xxxx and PROSPECT, respectively.
-
-:::
-
-## Radiation, Atoms and Molecules
-
-::: callout-note
-# Pigments
-
-A _pigment_ is a light absorbing chemical or biochemical molecule. Pigments release the energy in the absorbed photons through different excitation decay mechanisms described in this section.
-:::
-
--  Photon absorption and excitation
--  Decay/quenching: thermal, fluorescence, phosphorescence 
--  Luminescence
-
-## Quantities Describing Light-Matter Interactions
-
-As for radiation a table with symbols, equations, units and definitions.
-
-Adapt Gates, D (1980) Figure 8.35.
 
 A, Afr, Tfr, Rfr, n (internal, total, specular, etc.)
 
-=======
->>>>>>> Stashed changes
 Also intensive quantities describing properties.
 
