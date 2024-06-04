@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.330">
+<meta name="generator" content="quarto-1.4.554">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -37,6 +37,33 @@ ul.task-list li input[type="checkbox"] {
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 </head>
 
 <body class="fullcontent">
@@ -64,14 +91,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+
 <section id="sec:solar:radiation" class="level2">
 <h2 class="anchored" data-anchor-id="sec:solar:radiation">UV in solar radiation</h2>
-<p>When dealing with solar radiation, we frequently need to describe the position of the sun. The azimuth angle (<span class="math inline">\(\phi\)</span>) is measured clockwise from the North on a horizontal plane. The position on the vertical plane is measured either as the zenith angle (<span class="math inline">\(\theta\)</span>) downwards from the zenith, or as an elevation angle (<span class="math inline">\(h\)</span>) upwards from the horizon. Consequently <span class="math inline">\(h + \theta = 90\degree = \frac{\pi}{2}\,\)</span>radians. See Figure <a href="#fig:solar:position" data-reference-type="ref" data-reference="fig:solar:position">[fig:solar:position]</a> for a diagram. In contrast to Figure <a href="#fig_space" data-reference-type="ref" data-reference="fig_space">[fig_space]</a> and the discussion in section <a href="#sec:radiation:properties" data-reference-type="ref" data-reference="sec:radiation:properties">1.3</a> where the point radiation source is located at the origin of the system of coordinates, when describing the position of the sun as in Figure <a href="#fig:solar:position" data-reference-type="ref" data-reference="fig:solar:position">[fig:solar:position]</a> the observer is situated at the origin.</p>
+<p>When dealing with solar radiation, we frequently need to describe the position of the sun. The azimuth angle (<span class="math inline">\(\phi\)</span>) is usually measured clockwise from the North on a horizontal plane. The position on the vertical plane is measured either as the zenith angle (<span class="math inline">\(\theta\)</span>) downwards from the zenith, or as an elevation angle (<span class="math inline">\(h\)</span>) upwards from the horizon. Consequently <span class="math inline">\(h + \theta = 90^\circ = \frac{\pi}{2}\,\)</span>radians. See Figure <a href="#fig:solar:position" data-reference-type="ref" data-reference="fig:solar:position">[fig:solar:position]</a> for a diagram. In contrast to Figure <a href="#fig_space" data-reference-type="ref" data-reference="fig_space">[fig_space]</a> and the discussion in section <a href="#sec:radiation:properties" data-reference-type="ref" data-reference="sec:radiation:properties">1.3</a> where the point radiation source is located at the origin of the system of coordinates, when describing the position of the sun as in Figure <a href="#fig:solar:position" data-reference-type="ref" data-reference="fig:solar:position">[fig:solar:position]</a> the observer is situated at the origin.</p>
 <div class="figure*">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/solar_position.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -81,7 +109,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_sun.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -156,7 +184,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="photos/Lasse_sky_composite.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -164,7 +192,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_diffuse_TUV.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -173,7 +201,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig000_norm_AMs.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -181,7 +209,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig0_depl_norm_09UTC.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -189,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig1_depl_norm_log_am.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -206,7 +234,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_UVB_latitude.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -236,7 +264,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_waterabs.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -251,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_chlabs.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -268,7 +296,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_Jerlov.pdf" class="img-fluid" style="width:50.0%"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -277,12 +305,12 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="modelling-of-underwater-radiation">Modelling of underwater radiation</h3>
 <p>Following Beer’s law (Equation <a href="#eq:Beer-Lambert" data-reference-type="ref" data-reference="eq:Beer-Lambert">[eq:Beer-Lambert]</a>), for deep water (no reflection from bottom), radiance <span class="math inline">\(L(\lambda)\)</span> decreases exponentially with depth <span class="math inline">\(z\)</span> in the water column: <span class="math display">\[L(z,\lambda) = L(z=0,\lambda)\cdot\mathrm{e}^{-\frac{a\cdot z}{\cos\theta}} \label{equ_beer}\]</span> alternatively written as <span class="math display">\[\cos\theta\,\frac{{\rm d}L(z,\lambda)}{{\rm d}z} = -a\cdot L(z,\lambda) \label{equ_dbeer}\]</span> <span class="math inline">\(\theta\)</span> is the zenith angle of the incoming (downwelling) radiance in water. Note that Eqs.&nbsp;<a href="#equ_beer" data-reference-type="ref" data-reference="equ_beer">[equ_beer]</a> and <a href="#equ_dbeer" data-reference-type="ref" data-reference="equ_dbeer">[equ_dbeer]</a> are only valid if the water column is homogeneous with depth and there are no scattering particles and internal sources of light in the water, i.e.&nbsp;no fluorescence, raman scattering, nor bioluminescence. Thus, calculation of actual radiative transfer in water (not under idealised conditions) is much more complicated and can only be solved approximately by using empirical, semi-analytical or computational models <span class="citation" data-cites="dekke93 moble94 leezp02 alber06">[@dekke93; @moble94; @leezp02; @alber06]</span>.</p>
 <p>The radiative transfer equations <a href="#equ_beer" data-reference-type="ref" data-reference="equ_beer">[equ_beer]</a> and <a href="#equ_dbeer" data-reference-type="ref" data-reference="equ_dbeer">[equ_dbeer]</a> are valid for radiance <span class="math inline">\(L\)</span>, which represents the <span data-acronym-label="collimated" data-acronym-form="singular+short">collimated</span> beam from one specific direction. Due to their construction, radiance detectors do not measure a beam from an infinitely small solid angle, they have an aperture of typically one or two degrees. Other types of detectors sense light from more than one direction, they measure the entire sphere or hemisphere (for details see also section <a href="#sec:basic:concepts" data-reference-type="ref" data-reference="sec:basic:concepts">[sec:basic:concepts]</a> on page ), by integrating the incoming radiance over all directions. Another useful relationship between irradiance and fluence rate can be obtained using the Gershun equation: <span class="math display">\[\frac{\rm d}{{\rm d}z} E(z,\lambda) = -a \, E_0(z,\lambda) \label{equ_gershun}\]</span> If, for example, only the downwelling irradiance <span class="math inline">\(E_d(z,\lambda)\)</span> is measured or necessary for calculating radiative transfer, Equation <a href="#equ_dbeer" data-reference-type="ref" data-reference="equ_dbeer">[equ_dbeer]</a> yields <span class="math display">\[\frac{{\rm d}E_d(z,\lambda)}{{\rm d}z} = -K_d\cdot E_d(z,\lambda) \label{equ_downirr}\]</span> giving the diffuse attenuation coefficient for downwelling irradiance, <span class="math inline">\(K_d\)</span>. <span class="math inline">\(K_d\)</span> is related to the total absorption <span class="math inline">\(a\)</span> and scattering <span class="math inline">\(b\)</span> as well as to <span class="math inline">\(\theta\)</span> and also the solar zenith angle <span class="math inline">\(\theta_s\)</span> <span class="citation" data-cites="kirkj91 alber03">[@kirkj91; @alber03]</span>. A practical and often-used method to estimate <span class="math inline">\(K_d\)</span>, and therefore the transparency of the water, is the Secchi disk test. The visibility of a submerged white disk can be correlated to downwelling diffuse attenuation <span class="citation" data-cites="tyler68">[@tyler68]</span>. This and also the penetration depth <span class="math inline">\(z_d\)</span> give useful information about the water body. The penetration of irradiance important for photosynthesis (primary production) is often expressed as the depth at which, for example, 1% or 10% of the value just below the water surface is reached. The depth, where 1% of PAR is reached, separates the euphotic zone from the aphotic zone. After <span class="citation" data-cites="Kirk1994">@Kirk1994</span>, <span class="math inline">\(z_d\)</span> can be obtained from <span class="math inline">\(K_d\)</span>: <span class="math inline">\(z_d(1\%) = 4.6/K_d\)</span> and <span class="math inline">\(z_d(10\%) = 2.3/K_d\)</span>. In Figure <a href="#fig:Valdivia" data-reference-type="ref" data-reference="fig:Valdivia">[fig:Valdivia]</a>, an example of spectral attenuation of solar radiation at different depths, as well as the penetration depths of UV-B, UV-A radiation and PAR are given for coastal waters of the south-eastern Pacific Ocean (off the coast of Chile).</p>
-<p>A very useful tool to simulate spectral radiance and irradiance under water, depending on different concentrations of the water constituents or bottom depth and type, is called WASI (water colour simulator, <span class="citation" data-cites="gegep04">[@gegep04]</span>). The software includes different analytical parameterisations and it can also be used for inverse calculations, i.e.&nbsp;for estimating optical properties and concentrations of water constituents from (remote sensing) measurements. The software program including the manual is available free of charge using an anonymous login at the ftp server <a href="ftp://ftp.dfd.dlr.de/pub/WASI" class="uri">ftp://ftp.dfd.dlr.de/pub/WASI</a>. Other models, which include angular distributions of radiation under water are, for example, the Monte Carlo method [<span class="citation" data-cites="prahl89">@prahl89</span>; <span class="citation" data-cites="Wang1995">@Wang1995</span>]<a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, HydroLight (technique described by <span class="citation" data-cites="moble94">[@moble94]</span>), or EcoLight-S <span class="citation" data-cites="moble11">[@moble11]</span>.</p>
+<p>A very useful tool to simulate spectral radiance and irradiance under water, depending on different concentrations of the water constituents or bottom depth and type, is called WASI (water colour simulator, <span class="citation" data-cites="gegep04">[@gegep04]</span>). The software includes different analytical parameterisations and it can also be used for inverse calculations, i.e.&nbsp;for estimating optical properties and concentrations of water constituents from (remote sensing) measurements. The software program including the manual is available free of charge using an anonymous login at the ftp server <a href="ftp://ftp.dfd.dlr.de/pub/WASI" class="uri">ftp://ftp.dfd.dlr.de/pub/WASI</a>. Other models, which include angular distributions of radiation under water are, for example, the Monte Carlo method <span class="citation" data-cites="prahl89 Wang1995">[@prahl89; @Wang1995]</span><a href="#fn6" class="footnote-ref" id="fnref6" role="doc-noteref"><sup>6</sup></a>, HydroLight (technique described by <span class="citation" data-cites="moble94">[@moble94]</span>), or EcoLight-S <span class="citation" data-cites="moble11">[@moble11]</span>.</p>
 <div class="sidewaysfigure*">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_Valdivia2.pdf" class="img-fluid" style="width:90.0%"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -302,7 +330,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/BG+UV-B_ChlFluor_x2_side.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -327,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_dose_responses.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -338,7 +366,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_action_spectra.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -351,7 +379,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/fig_polychrom.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -384,7 +412,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/sosi_cuvette.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -393,7 +421,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/app_polyspec_sheet1.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -402,7 +430,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/app_polyspec_sheet3.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -469,7 +497,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/app_polyspec_sheet4.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -478,7 +506,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/app_polyspec_solver0.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -490,7 +518,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><embed src="figures/app_polyspec_solved.pdf" class="img-fluid"></p>
-<figcaption class="figure-caption">image</figcaption>
+<figcaption>image</figcaption>
 </figure>
 </div>
 </div>
@@ -498,7 +526,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 
 
-<div id="quarto-appendix" class="default"><aside id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>Available as ASCII file at PMODWRC, <a href="ftp://ftp.pmodwrc.ch/pub/publications/pmod615.asc" class="uri">ftp://ftp.pmodwrc.ch/pub/publications/pmod615.asc</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
@@ -511,7 +539,7 @@ ul.task-list li input[type="checkbox"] {
 <li id="fn8"><p>Reciprocity refers to the assumption that equal values of photon fluence achieved by irradiation differing in length and photon irradiance, but supplying the same total number of photons, are expected to elicit an identical response.<a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 <li id="fn9"><p>available from <a href="http://extensions.services.openoffice.org/project/NLPSolver" class="uri">http://extensions.services.openoffice.org/project/NLPSolver</a>.<a href="#fnref9" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
-</aside></div></main>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
@@ -592,6 +620,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
   function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
@@ -626,7 +672,11 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
   const xrefs = window.document.querySelectorAll('a.quarto-xref');
@@ -641,15 +691,28 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
     stripColumnClz(note)
-    if (id.startsWith('sec-')) {
+    if (id === null || id.startsWith('sec-')) {
       // Special case sections, only their first couple elements
       const container = document.createElement("div");
       if (note.children && note.children.length > 2) {
-        for (let i = 0; i < 2; i++) {
-          container.appendChild(note.children[i].cloneNode(true));
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
         }
         return container.innerHTML
       } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
         return note.innerHTML;
       }
     } else {
@@ -658,7 +721,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (anchorLink) {
         anchorLink.remove();
       }
-      return note.innerHTML;
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
     }
   }
   for (var i=0; i<xrefs.length; i++) {
@@ -700,6 +771,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             instance.show();
           });
         }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
       }
     }, function(instance) {
     });
@@ -775,7 +869,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     window.addEventListener(
       "resize",
       throttle(() => {
-        console.log("RESIZE");
         elRect = undefined;
         if (selectedAnnoteEl) {
           selectCodeLines(selectedAnnoteEl);

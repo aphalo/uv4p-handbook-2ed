@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.554">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -21,7 +21,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="BTV2-radiaition-and-optics_files/libs/clipboard/clipboard.min.js"></script>
@@ -107,7 +127,7 @@ window.Quarto = {
 
 <section id="wavelength-and-colour" class="level2">
 <h2 class="anchored" data-anchor-id="wavelength-and-colour">Wavelength and Colour</h2>
-<p>Radiation can be described as waves, with wavelength or frequency as properties, or based on quantum physics, as photons of specific energy. This “double personality” of light is important as each viewpoint provides a simpler explanation for different specific phenomena, such as refraction and reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell’s equations.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> From the second perspective, Plank’s law describes the energy of a quantum as inversely proportional to wavelength.</p>
+<p>Radiation, or radiant energy, can be described as waves, with wavelength or frequency as properties, or based on quantum physics, as photons of specific energy. This “double personality” of light is important as each approach provides a simpler explanation than the other one for different specific phenomena, such as refraction and reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell’s equations.<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> From the second perspective, Plank’s law describes the energy of a quantum as inversely proportional to wavelength.</p>
 <p>The wavelength ranges of visible radiation, described by their colour based on human vision’s response to monochromatic light, are shown in <a href="#fig-wavebands-short" class="quarto-xref">Figure&nbsp;1</a>, topmost bar of wavebands. The colour ranges indicated in <a href="#fig-wavebands-short" class="quarto-xref">Figure&nbsp;1</a> are one approximation out of several available. We follow the ISO and CIE standards when applicable. The electromagnetic spectrum is continuous with no clear boundaries between one colour and the next. Colours are the result of the interaction of different wavelengths of radiation with the photoreceptor pigments in the eye and the processing of the stimuli by the brain. Alternative definitions based on other sensory systems or energy capture systems are available, some of them applicable to plants are shown in <a href="#fig-wavebands-short" class="quarto-xref">Figure&nbsp;1</a>, two lowermost bars of wavebands.</p>
 <div class="cell">
 <div class="cell-output-display">
@@ -117,7 +137,7 @@ window.Quarto = {
 <img src="BTV2-radiaition-and-optics_files/figure-html/fig-wavebands-short-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wavebands-short-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: The solar spectrum, <span class="math inline">\(280-900\,\mathrm{nm}\)</span>, and different commonly used <em>named</em> wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, human-vision colours according to ISO XXXXX, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, colours as frequently defined in plant photobiology (following Sellaro20xx and Smith19XX), and PAR (McCree 1971).
+Figure&nbsp;1: The solar spectrum, <span class="math inline">\(280-900\,\mathrm{nm}\)</span>, and different commonly used <em>named</em> wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, human-vision colours according to ISO 21348, UV and IR bands according to ISO 21348, UV and IR bands according to CIE, colours as frequently defined in plant photobiology (following <span class="citation" data-cites="Sellaro2010">Sellaro et al. (<a href="#ref-Sellaro2010" role="doc-biblioref">2010</a>)</span> and <span class="citation" data-cites="Smith1981">Smith (<a href="#ref-Smith1981" role="doc-biblioref">1981</a>)</span>), and PAR <span class="citation" data-cites="McCree1972b">(<a href="#ref-McCree1972b" role="doc-biblioref">McCree 1972</a>)</span>.
 </figcaption>
 </figure>
 </div>
@@ -132,7 +152,7 @@ Figure&nbsp;1: The solar spectrum, <span class="math inline">\(280-900\,\mathrm{
 <img src="BTV2-radiaition-and-optics_files/figure-html/fig-wavebands-all-1.png" class="img-fluid figure-img" width="672">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-wavebands-all-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;2: The solar spectrum, <span class="math inline">\(250-3000\,\mathrm{nm}\)</span>, and different commonly used <em>named</em> wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, visible light according to ISO XXXXX and CIE, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, PAR (McCree1971) and ePAR (Zhen2021).
+Figure&nbsp;2: The solar spectrum, <span class="math inline">\(250-3000\,\mathrm{nm}\)</span>, and different commonly used <em>named</em> wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, visible light according to ISO 21348 and CIE, UV and IR bands according to ISO 21348, UV and IR bands according to CIE, PAR <span class="citation" data-cites="McCree1972b">(<a href="#ref-McCree1972b" role="doc-biblioref">McCree 1972</a>)</span> and ePAR <span class="citation" data-cites="Zhen2022a">(<a href="#ref-Zhen2022a" role="doc-biblioref">Zhen, Iersel, and Bugbee 2022</a>)</span>.
 </figcaption>
 </figure>
 </div>
@@ -247,10 +267,16 @@ Figure&nbsp;5: Definition of the solid angle dΩ and the geometry of areas in th
 </div>
 <section id="radiation-quantities" class="level3">
 <h3 class="anchored" data-anchor-id="radiation-quantities">Radiation Quantities</h3>
-<p>The amount of radiation can be quantified in different ways. Each quantity is useful in different circumstances. We have already used some of these quantities above, here we Quantities can describe flows (energy per unit time), flux rates (energy per unit time and unit area), exposure (energy per event and unit area), radiant flux (energy per unit time) and radiance (energy per unit area and solid angle). The shape of the receiving surface can be a plane, a sphere, a hemisphere or even a cylinder. In the case of radiance, the angle of acceptance of the sensor can also vary but is usually narrow (<span class="math inline">\(\leq 10^\circ\)</span>). These definitions are independent of wavelengths, but the quantities are in most cases used to describe energy integrated over a certain range of wavelengths based on the “named” wavebands shown in <a href="#fig-wavebands-short" class="quarto-xref">Figure&nbsp;1</a> and <a href="#fig-wavebands-all" class="quarto-xref">Figure&nbsp;2</a>. The definitions and symbols of several physical quantities used to describe the “amount of radiation” are given in <span class="citation" data-cites="tab-energy-quantites">(<a href="#ref-tab-energy-quantites" role="doc-biblioref"><strong>tab-energy-quantites?</strong></a>)</span>.</p>
+<p>The amount of radiation can be quantified in different ways. Each quantity is useful in different circumstances. We have already used some of these quantities above, here we Quantities can describe flows (energy per unit time), flux rates (energy per unit time and unit area), exposure (energy per event and unit area), radiant flux (energy per unit time) and radiance (energy per unit area and solid angle). The shape of the receiving surface can be a plane, a sphere, a hemisphere or even a cylinder. In the case of radiance, the angle of acceptance of the sensor can also vary but is usually narrow (<span class="math inline">\(\leq 10^\circ\)</span>). These definitions are independent of wavelengths, but the quantities are in most cases used to describe energy integrated over a certain range of wavelengths based on the “named” wavebands shown in <a href="#fig-wavebands-short" class="quarto-xref">Figure&nbsp;1</a> and <a href="#fig-wavebands-all" class="quarto-xref">Figure&nbsp;2</a>. The definitions and symbols of several physical quantities used to describe the “amount of radiation” are given in <a href="#tbl-energy-quantities" class="quarto-xref">Table&nbsp;1</a>.</p>
 <div class="table*">
 <div class="center">
-<table class="table">
+<div id="tbl-energy-quantities" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-energy-quantities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Energy based radiation quantities. Commonly used symbols and units in the SI (Systeme Internationale).
+</figcaption>
+<div aria-describedby="tbl-energy-quantities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 34%">
 <col style="width: 26%">
@@ -297,12 +323,21 @@ Figure&nbsp;5: Definition of the solid angle dΩ and the geometry of areas in th
 </tbody>
 </table>
 </div>
+</figure>
+</div>
+</div>
 </div>
 <p>Taking into account <a href="#fig-space" class="quarto-xref">Figure&nbsp;5</a>, the corresponding equations and assuming a homogenous flux, the relation between irradiance <span class="math inline">\(E\)</span> and intensity <span class="math inline">\(I\)</span> is given by <span class="math display">\[E = \frac{I \times \cos\alpha}{r^2} \label{equ_r2law}\]</span>. The irradiance decreases by the square of the distance to the source and depends on the tilt of the detecting surface area, <span class="math inline">\(\alpha\)</span>. This is valid only for theretical point sources, and a good approximation for small ones. For outdoor measurements the sun can be assumed to be a point source. For artificial light sources simple LEDs (light-emitting diodes) without optics on top are also effectively point sources. However, LEDs with optics—and other artificial light sources with optics or reflectors designed to give a narrower light beam—deviate to various extents from the rule of a decrease of irradiance proportional to the square of the distance from the light source.</p>
-<p>When we are interested in photochemical reactions, the most relevant radiation quantities are those expressed in photons. The reason for this is that, as discussed in section <a href="#sec:photobio:principles" data-reference-type="ref" data-reference="sec:photobio:principles">1.2</a> on page , molecules are excited by the absorption of certain fixed amounts of energy or quanta. The surplus energy “decays” by non-photochemical processes. When studying photosynthesis, where many photons of different wavelengths are simultaneously important, we normally use photon irradiance to describe amount of . The name photosynthetic photon flux density, or , is also frequently used when referring to photon irradiance. When dealing with energy balance of an object instead of photochemistry, we use (energy) irradiance. In meteorology both and visible radiation, are quantified using energy-based quantities. When dealing with photochemistry as in responses mediated by UVR8, an photoreceptor, the use of quantum quantities is preferred. According to the physical energetic quantities in the table <a href="#tab:Phys:Quants" data-reference-type="ref" data-reference="tab:Phys:Quants">[tab:Phys:Quants]</a>, the equivalent photon related quantities are listed in the table below and have the subscript <span class="math inline">\(\mathrm{p}\)</span>.</p>
-<p><strong>Table.</strong> Photon quantities of light.</p>
+<p>When we are interested in photochemical reactions, the most relevant radiation quantities are those expressed in photons. The reason for this is that, as discussed in section <a href="#sec:photobio:principles" data-reference-type="ref" data-reference="sec:photobio:principles">1.2</a> on page , molecules are excited by the absorption of certain fixed amounts of energy or quanta. The surplus energy “decays” by non-photochemical processes. When studying photosynthesis, where many photons of different wavelengths are simultaneously important, we normally use photon irradiance to describe amount of . The name photosynthetic photon flux density, or , is also frequently used when referring to photon irradiance. When dealing with energy balance of an object instead of photochemistry, we use (energy) irradiance. In meteorology both and visible radiation, are quantified using energy-based quantities. When dealing with photochemistry as in responses mediated by UVR8, a photoreceptor, the use of quantum quantities is preferred. Photon based radiation quantities are listed in <a href="#tbl-photon-quantities" class="quarto-xref">Table&nbsp;2</a>, the symbol <span class="math inline">\(Q\)</span> (“quanta”) is used for photon irradiance.</p>
+<div class="table*">
 <div class="center">
-<table class="table">
+<div id="tbl-photon-quantities" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-photon-quantities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Photon-based radiation quantities. Commonly used symbols and units in the SI (Systeme Internationale).
+</figcaption>
+<div aria-describedby="tbl-photon-quantities-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -334,63 +369,136 @@ Figure&nbsp;5: Definition of the solid angle dΩ and the geometry of areas in th
 </tbody>
 </table>
 </div>
-<p>These quantities can be also used based on a ‘chemical’ amount of moles by dividing the quantities by Avogadro’s number <span class="math inline">\(N_A=6.022\times 10^{23}\)</span> mol<span class="math inline">\(^{-1}\)</span>. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e., divided by the energy of a single photon at each wavelength as defined in equation <a href="#equ_energy" data-reference-type="ref" data-reference="equ_energy">[equ_energy]</a>. This yields for example <span class="math display">\[\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\cdot\frac{\partial q}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}Q(\lambda) = \frac{\lambda}{h\;c}\cdot E(\lambda)\]</span> When dealing with bands of wavelengths, for example an integrated value like from 400 to 700 nm, it is necessary to repeat these calculations at each wavelength and then integrate over the wavelengths. For example, the photon irradiance or in moles of photons is obtained by <span class="math display">\[Q_\mathrm{PAR} = \frac{1}{N_\mathrm{A}}\int_{400\;\mathrm{nm}}^{700\,\mathrm{nm}}\frac{\lambda}{hc}\;E(\lambda)\;\mathrm{d}\lambda\]</span> For integrated values of or radiation the calculation is done analogously by integrating from 280 to 315 nm or 315 to 400 nm, respectively.</p>
-<p>If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given in the table below. For , 1 of “average daylight” is approximately 4.6. This is exact only if the radiation is equal from 400 to 700 nm, because the factor is the value at the central wavelength at 550 nm. Further details are discussed in section <a href="#sec:basic:concepts" data-reference-type="ref" data-reference="sec:basic:concepts">[sec:basic:concepts]</a> on page .</p>
-<p><strong>Table.</strong> Conversion factors of photon and energy quantities at different wavelengths.</p>
+</figure>
+</div>
+</div>
+</div>
+<p>These quantities can be also used based on a ‘chemical’ amount of moles by dividing the quantities by Avogadro’s number <span class="math inline">\(N_A=6.022\times 10^{23}\)</span> mol<span class="math inline">\(^{-1}\)</span>. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e., divided by the energy of a single photon at each wavelength as defined in equation XXXX. This yields, for example, <span class="math display">\[\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\times\frac{\partial q}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}Q(\lambda) = \frac{\lambda}{h\;c}\times E(\lambda)\]</span> When dealing with bands of wavelengths, for example an integrated value like from 400 to 700 nm, it is necessary to repeat these calculations at each wavelength and then integrate over the wavelengths. For example, the photon irradiance or in moles of photons is obtained by <span class="math display">\[Q_\mathrm{PAR} = \frac{1}{N_\mathrm{A}}\int_{400\;\mathrm{nm}}^{700\,\mathrm{nm}}\frac{\lambda}{hc}\;E(\lambda)\;\mathrm{d}\lambda\]</span> For integrated values of or radiation the calculation is done analogously by integrating from 280 to 315 nm or 315 to 400 nm, respectively.</p>
+<p>If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given below in <a href="#tbl-energy-photon-conversion" class="quarto-xref">Table&nbsp;3</a>. For “average daylight” in the wavelength band 400 to 700 nm the conversion factor is approximately <span class="math inline">\(4.6\,\mathrm{\mu mol\,J^{-1}}\)</span>. This is exact at a wavelength at 550 nm, and will deviate depending on the shape of the spectrum.</p>
+<div class="table*">
 <div class="center">
-<table class="table">
+<div id="tbl-energy-photon-conversion" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-energy-photon-conversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;3: Energy per photon and conversion factors between photon and energy quantities at different wavelengths. The factors assume <span class="math inline">\(Q\)</span> values are expressed as <span class="math inline">\(\mathrm{\mu mol\,m^{-2}\,s^{-1}}\)</span> and <span class="math inline">\(I\)</span> values as <span class="math inline">\(\mathrm{W\,m^{-2}}\)</span>. The factors have units of <span class="math inline">\(\mathrm{\mu mol\,J^{-1}}\)</span> and <span class="math inline">\(\mathrm{J\,\mu mol^{-1}}\)</span> can be also used in the conversion of other quantities.
+</figcaption>
+<div aria-describedby="tbl-energy-photon-conversion-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
+<colgroup>
+<col style="width: 18%">
+<col style="width: 27%">
+<col style="width: 27%">
+<col style="width: 27%">
+</colgroup>
 <thead>
 <tr class="header">
-<th></th>
-<th style="text-align: center;">to</th>
-<th style="text-align: center;"><span class="math inline">\(\lambda\)</span> (nm)</th>
+<th><span class="math inline">\(\lambda\)</span> (nm)</th>
+<th style="text-align: center;"><span class="math inline">\(q\)</span> <span class="math inline">\(\mathrm{(eV)}\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(k, I_\lambda \to Q_\lambda\)</span> <span class="math inline">\((\mathrm{\mu mol\,J^{-1}})\)</span></th>
+<th style="text-align: center;"><span class="math inline">\(k, Q_\lambda \to I_\lambda\)</span> <span class="math inline">\((\mathrm{J\,\mu mol^{-1}})\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td></td>
-<td style="text-align: center;">2.34</td>
-<td style="text-align: center;">280</td>
+<td>250</td>
+<td style="text-align: center;">4.96</td>
+<td style="text-align: center;">2.09</td>
+<td style="text-align: center;">0.479</td>
 </tr>
 <tr class="even">
-<td></td>
-<td style="text-align: center;">2.49</td>
-<td style="text-align: center;">298</td>
+<td>300</td>
+<td style="text-align: center;">4.13</td>
+<td style="text-align: center;">2.51</td>
+<td style="text-align: center;">0.399</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td style="text-align: center;">2.63</td>
-<td style="text-align: center;">315</td>
+<td>350</td>
+<td style="text-align: center;">3.54</td>
+<td style="text-align: center;">2.93</td>
+<td style="text-align: center;">0.342</td>
 </tr>
 <tr class="even">
-<td></td>
-<td style="text-align: center;">2.99</td>
-<td style="text-align: center;">358</td>
-</tr>
-<tr class="odd">
-<td></td>
+<td>400</td>
+<td style="text-align: center;">3.10</td>
 <td style="text-align: center;">3.34</td>
-<td style="text-align: center;">400</td>
-</tr>
-<tr class="even">
-<td></td>
-<td style="text-align: center;">4.60</td>
-<td style="text-align: center;">550</td>
+<td style="text-align: center;">0.299</td>
 </tr>
 <tr class="odd">
-<td></td>
+<td>450</td>
+<td style="text-align: center;">2.76</td>
+<td style="text-align: center;">3.76</td>
+<td style="text-align: center;">0.266</td>
+</tr>
+<tr class="even">
+<td>500</td>
+<td style="text-align: center;">2.48</td>
+<td style="text-align: center;">4.18</td>
+<td style="text-align: center;">0.239</td>
+</tr>
+<tr class="odd">
+<td>550</td>
+<td style="text-align: center;">2.25</td>
+<td style="text-align: center;">4.60</td>
+<td style="text-align: center;">0.218</td>
+</tr>
+<tr class="even">
+<td>600</td>
+<td style="text-align: center;">2.07</td>
+<td style="text-align: center;">5.02</td>
+<td style="text-align: center;">0.199</td>
+</tr>
+<tr class="odd">
+<td>650</td>
+<td style="text-align: center;">1.91</td>
+<td style="text-align: center;">5.43</td>
+<td style="text-align: center;">0.184</td>
+</tr>
+<tr class="even">
+<td>700</td>
+<td style="text-align: center;">1.77</td>
 <td style="text-align: center;">5.85</td>
-<td style="text-align: center;">700</td>
+<td style="text-align: center;">0.171</td>
+</tr>
+<tr class="odd">
+<td>750</td>
+<td style="text-align: center;">1.65</td>
+<td style="text-align: center;">6.27</td>
+<td style="text-align: center;">0.160</td>
+</tr>
+<tr class="even">
+<td>800</td>
+<td style="text-align: center;">1.55</td>
+<td style="text-align: center;">6.69</td>
+<td style="text-align: center;">0.150</td>
+</tr>
+<tr class="odd">
+<td>850</td>
+<td style="text-align: center;">1.46</td>
+<td style="text-align: center;">7.11</td>
+<td style="text-align: center;">0.141</td>
+</tr>
+<tr class="even">
+<td>900</td>
+<td style="text-align: center;">1.38</td>
+<td style="text-align: center;">7.52</td>
+<td style="text-align: center;">0.133</td>
 </tr>
 </tbody>
 </table>
 </div>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="effective-quantities" class="level3">
-<h3 class="anchored" data-anchor-id="effective-quantities">Effective quantities</h3>
-<p>Besides the physical quantities used for all electromagnetic radiation, there are also equivalent spectrally weighted quantities used to assess the effect of radiation on a sensory system, photochemical reactions and biological responses. The most widely used are photometric quantities, describing the apparent brightness of light to the human eye. Although quantitatively irrelevant to systems other that human vision, they are commonly used by lamp manufacturers to describe light output of artificial light sources.</p>
+<section id="effective-radiation-quantities" class="level3">
+<h3 class="anchored" data-anchor-id="effective-radiation-quantities">Effective radiation quantities</h3>
+<p>Besides the physical quantities used for all electromagnetic radiation, there are also equivalent spectrally weighted quantities used to assess the effect of radiation on sensory systems, photochemical reactions and photobiological responses.</p>
+<p>The most widely used biologically effective quantities are photometric quantities, describing the apparent brightness of light to the human eye. Although quantitatively irrelevant to systems other that human vision, they are commonly used by lamp manufacturers to describe light output of artificial light sources. Photometric sensors are also the most widely available. Photometric or illumination quantities are expressed in different units than those of physical quantities.</p>
 <p><strong>Add short description of photometric quantities and units. (Text box in BTV1)</strong></p>
-<p>Photosynthetically active radiation, CIE’s erythemal exposures, and many other “effective” quantities are in common use. These are described in Chapter XXXXX.</p>
+<p>Photosynthetically active radiation (PAR), is also an effective radiation quantity, proposed in the early 1970’s <span class="citation" data-cites="McCree1973">(<a href="#ref-McCree1973" role="doc-biblioref"><strong>McCree1973?</strong></a>)</span>. Before its widespread acceptance and the widespread availability of PAR or “quantum” light sensors. PAR is expressed in physical units as a flux of photons within 400 to 700 nm.</p>
+<p>In the case of UV radiation, different biologically effective weightings are used, mostly to describe damage or inhibition. These quantities are normally expressed using energy flux units. However, these are <em>weighted</em> values that do not describe an energy flux but instead a value assumed to be proportional to a response such as growth inhibition.</p>
+<p>Photosynthetically active radiation, Caldwell’s Generalized Plant Damage spectrum or GPAS-based exposures, and several other “effective” quantities are in common use in plant research and plant production. These are described in detail in Chapter XXXXX.</p>
 </section>
 </section>
 <section id="interactions-of-light-with-matter" class="level2">
@@ -541,7 +649,7 @@ Figure&nbsp;10: Path of the radiance and influences of absorbing and scattering 
 </figure>
 </div>
 <p>Putting together the different components described above, the radiative transfer equation is obtained <span class="math display">\[\cos\theta\,\frac{{\rm d}L}{{\rm d}z} = -(a+s)\times L + L^E + L^I + L^S \label{equ_rte}\]</span> The dependencies of <span class="math inline">\(L\)</span> on <span class="math inline">\(\lambda\)</span>, <span class="math inline">\(\theta\)</span>, and <span class="math inline">\(\phi\)</span> are omitted here for brevity. No exact analytical solution to the radiative transfer equation exists, hence it is necessary either to use numerical models or to use analytical approximations.</p>
-<p>The parameters of the light field can be simulated by modelling the paths of photons, also called “ray tracing”. For an infinite number of photons, the light field parameters reach their exact values asymptotically. The advantage of numerical simulation methods is a relatively simple structure of the program, but its disadvantage is the time-consuming computation involved. Details of the application of the Monte Carlo method to simulations are explained for example by <span class="citation" data-cites="prahl89">(<a href="#ref-prahl89" role="doc-biblioref"><strong>prahl89?</strong></a>)</span>, <span class="citation" data-cites="Wang1995">(<a href="#ref-Wang1995" role="doc-biblioref"><strong>Wang1995?</strong></a>)</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, or <span class="citation" data-cites="moble94">(<a href="#ref-moble94" role="doc-biblioref"><strong>moble94?</strong></a>)</span>.</p>
+<p>The parameters of the light field can be simulated by modelling the paths of photons, also called “ray tracing”. For an infinite number of photons, the light field parameters reach their exact values asymptotically. The advantage of numerical simulation methods is a relatively simple structure of the program, but its disadvantage is the time-consuming computation involved. Details of the application of the Monte Carlo method to simulations are explained for example by <span class="citation" data-cites="prahl89">Prahl et al. (<a href="#ref-prahl89" role="doc-biblioref">1989</a>)</span>, <span class="citation" data-cites="Wang1995">Wang, Jacques, and Zheng (<a href="#ref-Wang1995" role="doc-biblioref">1995</a>)</span><a href="#fn4" class="footnote-ref" id="fnref4" role="doc-noteref"><sup>4</sup></a>, or <span class="citation" data-cites="moble94">Mobley (<a href="#ref-moble94" role="doc-biblioref">1994</a>)</span>.</p>
 <p>The other way to solve the radiative transfer equation is through the development of analytical approximations for all the quantities needed. In this case, the result is not exact, but it has the advantage of fast computation and that the analytical equations can be inverted easily. This leads to the idealised case of a source-free (<span class="math inline">\(L^S=0\)</span>) and non-scattering media, i.e., <span class="math inline">\(b=0\)</span> and therefore <span class="math inline">\(L^E=L^I=0\)</span>. Then, equation XXXX can be integrated easily to yield</p>
 <p><span class="math display">\[L(z_1) = L(z_0)\times \mathrm{e}^{-\frac{a\cdot(z_1-z_0)}{\cos\theta}}\]</span></p>
 <p>The radiance value at the upper boundary, <span class="math inline">\(L(z_0)\)</span>, is presumed known. This equation is known as Beer’s law (or Lambert’s law, Bouguer’s law, Beer-Lambert law), and describes any instance of exponential attenuation of light and is exact only for purely absorbing media—i.e., media that do not scatter radiation. It is of direct application in analytical chemistry, as it describes the direct proportionality of absorbance (<span class="math inline">\(A\)</span>) to the concentration of a “coloured” solute in a transparent solvent. True solutions are optically homogeneous, while suspensions and aerosols are not. The latter scatter light and their behaviour is different from that described by Beer’s law. In chemistry, Beer’s law is formulated in a simplified way by assuming a collimated light beam incident at 90 degrees</p>
@@ -602,9 +710,21 @@ Pigments
 </section>
 <section id="quantities-describing-light-matter-interactions" class="level3">
 <h3 class="anchored" data-anchor-id="quantities-describing-light-matter-interactions">Quantities Describing Light-Matter Interactions</h3>
+<p>Radiation incident on an object can be partitioned into three components based on its fate,</p>
+<p><span class="math display">\[1 = R^\mathrm{tot} + A_\mathrm{fr} + T^\mathrm{tot}\]</span> where <span class="math inline">\(R^\mathrm{tot}\)</span>, <span class="math inline">\(A_\mathrm{fr}\)</span>, and <span class="math inline">\(T^\mathrm{tot}\)</span> are expressed as fractions <a href="#tbl-light-matter-quantites" class="quarto-xref">Table&nbsp;4</a>. Alternatively, they can be expressed as percentages.</p>
+<p>If <span class="math inline">\(I_0\)</span> is the irradiance on the surface of an object, the “irradiance” entering the body of the object is given by <span class="math inline">\(I_0 \times (1 - R^\mathrm{tot})\)</span>. The irradiance exiting the opposite side of the object is given by <span class="math inline">\(I_0 \times T^\mathrm{tot}\)</span>.</p>
+<p>Internal transmittance <span class="math inline">\(T^\mathrm{int}\)</span> considers only the radiation entering the object, thus,</p>
+<p><span class="math display">\[1 = A_\mathrm{fr} + T^\mathrm{int}\]</span> from which it follows that always <span class="math inline">\(T^\mathrm{int} \geq T^\mathrm{tot}\)</span>. To convert <span class="math inline">\(T^\mathrm{int}\)</span> into <span class="math inline">\(T^\mathrm{tot}\)</span> we need to know <span class="math inline">\(R^\mathrm{tot}\)</span>,</p>
+<p><span class="math display">\[T^\mathrm{tot} = T^\mathrm{int} \times (1 - R^\mathrm{tot})\]</span> and <span class="math display">\[T^\mathrm{int} = \frac{T^\mathrm{tot}}{1 - R^\mathrm{tot}}\]</span></p>
 <div class="table*">
 <div class="center">
-<table class="table">
+<div id="tbl-light-matter-quantites" class="quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-light-matter-quantites-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;4: Physical quantities that describe the interaction of objects and light and related quantities describing intensive properties of materials.
+</figcaption>
+<div aria-describedby="tbl-light-matter-quantites-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<table class="caption-top table">
 <colgroup>
 <col style="width: 25%">
 <col style="width: 25%">
@@ -649,13 +769,13 @@ Pigments
 <td style="text-align: left;">Internal transmittance:</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;"><span class="math inline">\(Afr\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(A_\mathrm{fr}\)</span></td>
 <td style="text-align: center;">fraction</td>
 <td style="text-align: left;">Absorptance:</td>
 </tr>
 <tr class="even">
 <td style="text-align: center;"><span class="math inline">\(A\)</span></td>
-<td style="text-align: center;">fraction</td>
+<td style="text-align: center;">a.u.</td>
 <td style="text-align: left;">Absorbance:</td>
 </tr>
 <tr class="odd">
@@ -666,15 +786,64 @@ Pigments
 </tbody>
 </table>
 </div>
+</figure>
 </div>
-<p>As for radiation a table with symbols, equations, units and definitions.</p>
-<p>A, Afr, Tfr, Rfr, n (internal, total, specular, etc.)</p>
-<p>Also intensive quantities describing properties.</p>
+</div>
+</div>
 </section>
+</section>
+<section id="further-reading" class="level2">
+<h2 class="anchored" data-anchor-id="further-reading">Further Reading</h2>
+<p>The book <em>The Optics of Life</em> <span class="citation" data-cites="Johnsen2012">(<a href="#ref-Johnsen2012" role="doc-biblioref">Johnsen 2012</a>)</span> gives a detailed account of the different aspects of optics as the relate to organisms. Although animales are emphasized more than plants in the examples, overall it is highly relevant plant biologists.</p>
+<p>The classic book <em>Biophysical Ecology</em> <span class="citation" data-cites="Gates2012">(<a href="#ref-Gates2012" role="doc-biblioref">Gates 2012</a>)</span> covers a broader range of subjects and discusses implications for Ecology. It is relevant to the current and to the following chapter.</p>
+<p>The book <em>Photobiology: The Science of Light and Life</em> <span class="citation" data-cites="Bjoern2015">(<a href="#ref-Bjoern2015" role="doc-biblioref">Björn 2015</a>)</span> covers widely photobiology of animals and plants and includes introductory chapters on the physics of light.</p>
+</section>
+<section id="technical-references" class="level2">
+<h2 class="anchored" data-anchor-id="technical-references">Technical References</h2>
+<p>The <em>Compendium of Chemical Terminology</em> <span class="citation" data-cites="IUPAC2020">(<a href="#ref-IUPAC2020" role="doc-biblioref">Kaiser and Chalk 2020</a>)</span> (“IUPAC Gold Book”) provides up-to-date guidelines on the use of terminology and symbols used in chemistry including photochemistry.</p>
+<p>NIST publication 330 <span class="citation" data-cites="Newell2019">(<a href="#ref-Newell2019" role="doc-biblioref">Newell and Tiesinga 2019</a>)</span> describes the International System of Units (SI) in great detail, and together with the IUPAC Gold Book can help clarify the use of units in and technical publications.</p>
+
 </section>
 
 
-<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bjoern2015" class="csl-entry" role="listitem">
+Björn, L. O. 2015. <em>Photobiology: The Science of Light and Life</em>. 3rd ed. New York: Springer. <a href="https://books.google.fi/books?id=VDgLBgAAQBAJ">https://books.google.fi/books?id=VDgLBgAAQBAJ</a>.
+</div>
+<div id="ref-Gates2012" class="csl-entry" role="listitem">
+Gates, David M. 2012. <em>Biophysical Ecology</em>. Dover Publications, Incorporated.
+</div>
+<div id="ref-Johnsen2012" class="csl-entry" role="listitem">
+Johnsen, Sönke. 2012. <em>The Optics of Life: A Biologist’s Guide to Light in Nature</em>. Princeton, NJ: Princeton University Press.
+</div>
+<div id="ref-IUPAC2020" class="csl-entry" role="listitem">
+Kaiser, Jan, and Stuart Chalk, eds. 2020. <em>Compendium of Chemical Terminology</em>. International Union of Pure; Applied Chemistry. <a href="https://doi.org/10.1351/goldbook">https://doi.org/10.1351/goldbook</a>.
+</div>
+<div id="ref-McCree1972b" class="csl-entry" role="listitem">
+McCree, K. J. 1972. <span>“Test of Current Definitions of Photosynthetically Active Radiation Against Leaf Photosynthesis Data.”</span> <em>Agricultural Meteorology</em> 10: 443–53. <a href="https://doi.org/10.1016/0002-1571(72)90045-3">https://doi.org/10.1016/0002-1571(72)90045-3</a>.
+</div>
+<div id="ref-moble94" class="csl-entry" role="listitem">
+Mobley, C. D. 1994. <em>Light and Water - Radiative Transfer in Natural Waters</em>. San Diego: Academic Press.
+</div>
+<div id="ref-Newell2019" class="csl-entry" role="listitem">
+Newell, David B, and Eite Tiesinga. 2019. <em>The International System of Units (SI):: 2019 Edition</em>. National Institute of Standards; Technology. <a href="https://doi.org/10.6028/nist.sp.330-2019">https://doi.org/10.6028/nist.sp.330-2019</a>.
+</div>
+<div id="ref-prahl89" class="csl-entry" role="listitem">
+Prahl, S. A., M. Keijzer, S. L. Jacques, and A. J. Welch. 1989. <span>“A <span>M</span>onte <span>C</span>arlo Model of Light Propagation in Tissue.”</span> In <em>SPIE Proceedings of Dosimetry of Laser Radiation in Medicine and Biology</em>, edited by G. J. Müller and D. H. Sliney, IS 5:102–11.
+</div>
+<div id="ref-Sellaro2010" class="csl-entry" role="listitem">
+Sellaro, Romina, Marı́a Crepy, Santiago Ariel Trupkin, Elizabeth Karayekov, Ana Sabrina Buchovsky, Constanza Rossi, and Jorge Jose Casal. 2010. <span>“Cryptochrome as a Sensor of the Blue / Green Ratio of Natural Radiation in Arabidopsis.”</span> <em>Plant Physiology</em> 154: 401–9. <a href="https://doi.org/10.1104/pp.110.160820">https://doi.org/10.1104/pp.110.160820</a>.
+</div>
+<div id="ref-Smith1981" class="csl-entry" role="listitem">
+Smith, H. 1981. <em>Plants and the Daylight Spectrum</em>. London: Academic Press.
+</div>
+<div id="ref-Wang1995" class="csl-entry" role="listitem">
+Wang, L.- H., S. L. Jacques, and L.- Q. Zheng. 1995. <span>“<span>MCML</span> - <span>M</span>onte <span>C</span>arlo Modeling of Photon Transport in Multi-Layered Tissues.”</span> <em>Computer Methods and Programs in Biomedicine</em> 47: 131–46. <a href="https://doi.org/10.1016/0169-2607(95)01640-F">https://doi.org/10.1016/0169-2607(95)01640-F</a>.
+</div>
+<div id="ref-Zhen2022a" class="csl-entry" role="listitem">
+Zhen, Shuyang, Marc W. van Iersel, and Bruce Bugbee. 2022. <span>“Photosynthesis in Sun and Shade: The Surprising Importance of Far‐red Photons.”</span> <em>New Phytologist</em> 236 (2): 538–46. <a href="https://doi.org/10.1111/nph.18375">https://doi.org/10.1111/nph.18375</a>.
+</div>
+</div></section><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
 
 <ol>
 <li id="fn1"><p>These equations are a system of four partial differential equations describing classical electromagnetism.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>

@@ -2,7 +2,7 @@
 title: "Radiation and Optics"
 subtitle: "Heavily edited sections from BTV1 _1. Introduction_"
 author: "Pedro J. Aphalo with Andreas Albert, Lars Olof Björn, Lasse Yliantilla"
-bibliography: handbook.bib
+bibliography: handbook-ch01.bib
 format: html
 editor: source
 abstract: | 
@@ -19,7 +19,7 @@ library(photobiologyFilters)
 
 ## Wavelength and Colour
 
-Radiation can be described as waves, with wavelength or frequency as properties, or based on quantum physics, as photons of specific energy. This "double personality" of light is important as each viewpoint provides a simpler explanation for different specific phenomena, such as refraction and reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell's equations.[^1] From the second perspective, Plank's law describes the energy of a quantum as inversely proportional to wavelength.
+Radiation, or radiant energy, can be described as waves, with wavelength or frequency as properties, or based on quantum physics, as photons of specific energy. This "double personality" of light is important as each approach provides a simpler explanation than the other one for different specific phenomena, such as refraction and reflection at boundaries between materials and absorption of radiation by pigments and other molecules. From the first perspective, ultraviolet (UV), visible (VIS), and infrared (IR) radiation are electromagnetic waves and are described by the Maxwell's equations.[^1] From the second perspective, Plank's law describes the energy of a quantum as inversely proportional to wavelength.
 
 [^1]: These equations are a system of four partial differential equations describing classical electromagnetism.
 
@@ -27,7 +27,7 @@ The wavelength ranges of visible radiation, described by their colour based on h
 
 ```{r, echo=FALSE, warning=FALSE}
 #| label: fig-wavebands-short
-#| fig-cap: The solar spectrum, $280-900\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, human-vision colours according to ISO XXXXX, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, colours as frequently defined in plant photobiology (following Sellaro20xx and Smith19XX), and PAR (McCree 1971). 
+#| fig-cap: The solar spectrum, $280-900\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, human-vision colours according to ISO 21348, UV and IR bands according to ISO 21348, UV and IR bands according to CIE, colours as frequently defined in plant photobiology (following @Sellaro2010 and @Smith1981), and PAR [@McCree1972b]. 
 ggplot(normalise(sun_reference.mspct$ASTM.G173.global)) +
   geom_area(colour = "black", fill = "grey90") +
   stat_wb_box(w.band = VIS_bands("ISO"), ypos.fixed = 2, colour = "grey80", box.height = 0.2) +
@@ -51,7 +51,7 @@ Different regions or *wavebands* of UV and IR radiation are also shown in @fig-w
 
 ```{r, echo=FALSE, warning=FALSE}
 #| label: fig-wavebands-all
-#| fig-cap: The solar spectrum, $250-3000\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, visible light according to ISO XXXXX and CIE, UV and IR bands according to ISO XXXX, UV and IR bands according to CIE, PAR (McCree1971) and ePAR (Zhen2021). 
+#| fig-cap: The solar spectrum, $250-3000\,\mathrm{nm}$, and different commonly used _named_ wavebands. The solar spectrum at ground level for 1.5 air masses (ASTM G173 standard) and, from top to bottom, visible light according to ISO 21348 and CIE, UV and IR bands according to ISO 21348, UV and IR bands according to CIE, PAR [@McCree1972b] and ePAR [@Zhen2022a]. 
 ggplot(normalise(trim_spct(sun_reference.mspct$ASTM.G173.global, range = c(100, NA), fill = 0))) +
   geom_area(colour = "black", fill = "grey90") +
   stat_wb_box(w.band = VIS("ISO"), ypos.fixed = 2, colour = "grey80", box.height = 0.2) +
@@ -145,7 +145,7 @@ $$\Omega = \int_A \frac{{\rm d}A\cdot\cos\alpha}{r^2} \label{equ_solidangle}$$ T
 
 ### Radiation Quantities
 
-The amount of radiation can be quantified in different ways. Each quantity is useful in different circumstances. We have already used some of these quantities above, here we  Quantities can describe flows (energy per unit time), flux rates (energy per unit time and unit area), exposure (energy per event and unit area), radiant flux (energy per unit time) and radiance (energy per unit area and solid angle). The shape of the receiving surface can be a plane, a sphere, a hemisphere or even a cylinder. In the case of radiance, the angle of acceptance of the sensor can also vary but is usually narrow ($\leq 10^\circ$). These definitions are independent of wavelengths, but the quantities are in most cases used to describe energy integrated over a certain range of wavelengths based on the "named" wavebands shown in @fig-wavebands-short and @fig-wavebands-all. The definitions and symbols of several physical quantities used to describe the "amount of radiation" are given in @tab-energy-quantites.
+The amount of radiation can be quantified in different ways. Each quantity is useful in different circumstances. We have already used some of these quantities above, here we  Quantities can describe flows (energy per unit time), flux rates (energy per unit time and unit area), exposure (energy per event and unit area), radiant flux (energy per unit time) and radiance (energy per unit area and solid angle). The shape of the receiving surface can be a plane, a sphere, a hemisphere or even a cylinder. In the case of radiance, the angle of acceptance of the sensor can also vary but is usually narrow ($\leq 10^\circ$). These definitions are independent of wavelengths, but the quantities are in most cases used to describe energy integrated over a certain range of wavelengths based on the "named" wavebands shown in @fig-wavebands-short and @fig-wavebands-all. The definitions and symbols of several physical quantities used to describe the "amount of radiation" are given in @tbl-energy-quantities.
 
 ::: table*
 ::: center
@@ -157,51 +157,95 @@ The amount of radiation can be quantified in different ways. Each quantity is us
 |                                           $I=\frac{\partial \Phi}{\partial\Omega}$                                            |     W sr$^{-1}$      | Radiant intensity: emitted radiant flux of a surface area per solid angle                                                                            |
 |                                               $\epsilon=\frac{\partial \Phi}{\partial A}$                                                |      W m$^{-2}$      | Emittance: emitted radiant flux per surface area                                                                                                     |
 | $L=\frac{\partial^2 \Phi}{\partial \Omega (\partial A\cdot \cos\alpha)}=\frac{\partial I}{\partial A\cdot\cos\alpha}$ | W m$^{-2}$ sr$^{-1}$ | Radiance: emitted radiant flux per solid angle and surface area depending on the angle between radiant flux and surface perpendicular                |
+
+: Energy based radiation quantities. Commonly used symbols and units in the SI (Systeme Internationale).  {#tbl-energy-quantities}
+
 :::
 :::
 
 Taking into account @fig-space, the corresponding equations and assuming a homogenous flux, the relation between irradiance $E$ and intensity $I$ is given by $$E = \frac{I \times \cos\alpha}{r^2} \label{equ_r2law}$$. The irradiance decreases by the square of the distance to the source and depends on the tilt of the detecting surface area, $\alpha$. This is valid only for theretical point sources, and a good approximation for small ones. For outdoor measurements the sun can be assumed to be a point source. For artificial light sources simple LEDs (light-emitting diodes) without optics on top are also effectively point sources. However, LEDs with optics---and other artificial light sources with optics or reflectors designed to give a narrower light beam---deviate to various extents from the rule of a decrease of irradiance proportional to the square of the distance from the light source.
 
-When we are interested in photochemical reactions, the most relevant radiation quantities are those expressed in photons. The reason for this is that, as discussed in section [1.2](#sec:photobio:principles){reference-type="ref" reference="sec:photobio:principles"} on page , molecules are excited by the absorption of certain fixed amounts of energy or quanta. The surplus energy "decays" by non-photochemical processes. When studying photosynthesis, where many photons of different wavelengths are simultaneously important, we normally use photon irradiance to describe amount of . The name photosynthetic photon flux density, or , is also frequently used when referring to photon irradiance. When dealing with energy balance of an object instead of photochemistry, we use (energy) irradiance. In meteorology both and visible radiation, are quantified using energy-based quantities. When dealing with photochemistry as in responses mediated by UVR8, an photoreceptor, the use of quantum quantities is preferred. According to the physical energetic quantities in the table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}, the equivalent photon related quantities are listed in the table below and have the subscript $\mathrm{p}$.
+When we are interested in photochemical reactions, the most relevant radiation quantities are those expressed in photons. The reason for this is that, as discussed in section [1.2](#sec:photobio:principles){reference-type="ref" reference="sec:photobio:principles"} on page , molecules are excited by the absorption of certain fixed amounts of energy or quanta. The surplus energy "decays" by non-photochemical processes. When studying photosynthesis, where many photons of different wavelengths are simultaneously important, we normally use photon irradiance to describe amount of . The name photosynthetic photon flux density, or , is also frequently used when referring to photon irradiance. When dealing with energy balance of an object instead of photochemistry, we use (energy) irradiance. In meteorology both and visible radiation, are quantified using energy-based quantities. When dealing with photochemistry as in responses mediated by UVR8, a photoreceptor, the use of quantum quantities is preferred. Photon based radiation quantities are listed in @tbl-photon-quantities, the symbol $Q$ ("quanta") is used for photon irradiance.
 
-**Table.** Photon quantities of light.
-
+::: table*
 ::: center
 |                       Symbol                       |       Unit        | Description                                                                                                         |
 |:----------------:|:----------------:|:-----------------------------------|
 |                 $\Phi_\mathrm{p}$                  |     s$^{-1}$      | Photon flux: number of photons per time interval                                                                    |
 | $Q=\frac{\partial \Phi_\mathrm{p}}{\partial A}$ | m$^{-2}$ s$^{-1}$ | Photon irradiance: photon flux towards a surface area, photon flux density (earlier frequently called _photon flux density_ and abbreviated as PFD) |
 |         $H_p=\int_t\;Q\;\mathrm{d}t$         |     m$^{-2}$      | Photon exposure: number of photons towards a surface area during a time interval, photon fluence                    |
+
+: Photon-based radiation quantities. Commonly used symbols and units in the SI (Systeme Internationale).  {#tbl-photon-quantities}
+
+:::
 :::
 
-These quantities can be also used based on a 'chemical' amount of moles by dividing the quantities by Avogadro's number $N_A=6.022\times 10^{23}$ mol$^{-1}$. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e., divided by the energy of a single photon at each wavelength as defined in equation [\[equ_energy\]](#equ_energy){reference-type="ref" reference="equ_energy"}. This yields for example 
-$$\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\cdot\frac{\partial q}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}Q(\lambda) = \frac{\lambda}{h\;c}\cdot E(\lambda)$$ 
+These quantities can be also used based on a 'chemical' amount of moles by dividing the quantities by Avogadro's number $N_A=6.022\times 10^{23}$ mol$^{-1}$. To determine a quantity in terms of photons, an energetic quantity has to be weighted by the number of photons, i.e., divided by the energy of a single photon at each wavelength as defined in equation XXXX. This yields, for example, 
+$$\Phi_\mathrm{p} = \frac{\lambda}{h\;c}\times\frac{\partial q}{\partial t}\hspace{1cm}\mathrm{and}\hspace{1cm}Q(\lambda) = \frac{\lambda}{h\;c}\times E(\lambda)$$ 
 When dealing with bands of wavelengths, for example an integrated value like from 400 to 700 nm, it is necessary to repeat these calculations at each wavelength and then integrate over the wavelengths. For example, the photon irradiance or in moles of photons is obtained by 
 $$Q_\mathrm{PAR} = \frac{1}{N_\mathrm{A}}\int_{400\;\mathrm{nm}}^{700\,\mathrm{nm}}\frac{\lambda}{hc}\;E(\lambda)\;\mathrm{d}\lambda$$ For integrated values of or radiation the calculation is done analogously by integrating from 280 to 315 nm or 315 to 400 nm, respectively.
 
-If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given in the table below. For , 1 of "average daylight" is approximately 4.6. This is exact only if the radiation is equal from 400 to 700 nm, because the factor is the value at the central wavelength at 550 nm. Further details are discussed in section [\[sec:basic:concepts\]](#sec:basic:concepts){reference-type="ref" reference="sec:basic:concepts"} on page .
+If we have measured (energy) irradiance, and want to convert this value to photon irradiance, the exact conversion will be possible only if we have information about the spectral composition of the measured radiation. Conversion factors at different wavelengths are given below in @tbl-energy-photon-conversion. For "average daylight" in the wavelength band 400 to 700 nm the conversion factor is approximately $4.6\,\mathrm{\mu mol\,J^{-1}}$. This is exact at a wavelength at 550 nm, and will deviate depending on the shape of the spectrum.
 
-**Table.** Conversion factors of photon and energy quantities at different wavelengths.
-
+::: table*
 ::: center
-|     |  to  | $\lambda$ (nm) |
-|-----|:----:|:--------------:|
-|     | 2.34 |      280       |
-|     | 2.49 |      298       |
-|     | 2.63 |      315       |
-|     | 2.99 |      358       |
-|     | 3.34 |      400       |
-|     | 4.60 |      550       |
-|     | 5.85 |      700       |
+| $\lambda$ (nm) | $q$ $\mathrm{(eV)}$ |  $k, I_\lambda \to Q_\lambda$ $(\mathrm{\mu mol\,J^{-1}})$ | $k, Q_\lambda \to I_\lambda$ $(\mathrm{J\,\mu mol^{-1}})$ | 
+|----|:----:|:----:|:----:|
+|250     |4.96        |2.09|0.479|
+|300     |4.13        |2.51|0.399|
+|350     |3.54        |2.93|0.342|
+|400     |3.10        |3.34|0.299|
+|450     |2.76        |3.76|0.266|
+|500     |2.48        |4.18|0.239|
+|550     |2.25        |4.60|0.218|
+|600     |2.07        |5.02|0.199|
+|650     |1.91        |5.43|0.184|
+|700     |1.77        |5.85|0.171|
+|750     |1.65        |6.27|0.160|
+|800     |1.55        |6.69|0.150|
+|850     |1.46        |7.11|0.141|
+|900     |1.38        |7.52|0.133|
+
+: Energy per photon and conversion factors between photon and energy quantities at different wavelengths. The factors assume $Q$ values are expressed as $\mathrm{\mu mol\,m^{-2}\,s^{-1}}$ and $I$ values as $\mathrm{W\,m^{-2}}$. The factors have units of $\mathrm{\mu mol\,J^{-1}}$ and $\mathrm{J\,\mu mol^{-1}}$ can be also used in the conversion of other quantities. {#tbl-energy-photon-conversion}
+
+:::
 :::
 
-### Effective quantities
+```{r, echo=FALSE, eval=FALSE}
+# Ouput copied above to markdown table
 
-Besides the physical quantities used for all electromagnetic radiation, there are also equivalent spectrally weighted quantities used to assess the effect of radiation on a sensory system, photochemical reactions and biological responses. The most widely used are photometric quantities, describing the apparent brightness of light to the human eye. Although quantitatively irrelevant to systems other that human vision, they are commonly used by lamp manufacturers to describe light output of artificial light sources. 
+e2q2e.tb <- data.frame(
+  w.length = seq(from = 250, to = 900, by = 50),
+  e.irrad = 1,
+  q.irrad = 1e-6
+)
+e2q2e.tb$e.per.photon <- 
+  with(e2q2e.tb,
+    round(wl2energy(w.length, unit = "eV"), 2))
+e2q2e.tb$e2q <- 
+  with(e2q2e.tb,
+    round(as_quantum_mol(w.length, e.irrad) * 1e6, 2))
+e2q2e.tb$q2e <- 
+  with(e2q2e.tb,
+    round(as_energy(w.length, q.irrad), 3))
+e2q2e.tb <- e2q2e.tb[ , -(2:3)]
+simplermarkdown::md_table(e2q2e.tb)
+```
+
+
+### Effective radiation quantities
+
+Besides the physical quantities used for all electromagnetic radiation, there are also equivalent spectrally weighted quantities used to assess the effect of radiation on sensory systems, photochemical reactions and photobiological responses. 
+
+The most widely used biologically effective quantities are photometric quantities, describing the apparent brightness of light to the human eye. Although quantitatively irrelevant to systems other that human vision, they are commonly used by lamp manufacturers to describe light output of artificial light sources. Photometric sensors are also the most widely available. Photometric or illumination quantities are expressed in different units than those of physical quantities.
 
 **Add short description of photometric quantities and units. (Text box in BTV1)**
 
-Photosynthetically active radiation, CIE's erythemal exposures, and many other "effective" quantities are in common use. These are described in Chapter XXXXX.
+Photosynthetically active radiation (PAR), is also an effective radiation quantity, proposed in the early 1970's @McCree1973. Before its widespread acceptance and the widespread availability of PAR or "quantum" light sensors. PAR is expressed in physical units as a flux of photons within 400 to 700 nm.
+
+In the case of UV radiation, different biologically effective weightings are used, mostly to describe damage or inhibition. These quantities are normally expressed using energy flux units. However, these are _weighted_ values that do not describe an energy flux but instead a value assumed to be proportional to a response such as growth inhibition.
+
+Photosynthetically active radiation, Caldwell's Generalized Plant Damage spectrum or GPAS-based exposures, and several other "effective" quantities are in common use in plant research and plant production. These are described in detail in Chapter XXXXX.
 
 ## Interactions of Light with Matter
 
@@ -393,6 +437,26 @@ A _pigment_ is a light absorbing chemical or biochemical molecule. Which wavelen
 
 ### Quantities Describing Light-Matter Interactions
 
+Radiation incident on an object can be partitioned into three components based on its fate,
+
+$$1 = R^\mathrm{tot} + A_\mathrm{fr} + T^\mathrm{tot}$$
+where $R^\mathrm{tot}$, $A_\mathrm{fr}$, and $T^\mathrm{tot}$ are expressed as fractions [@tbl-light-matter-quantites]. Alternatively, they can be expressed as percentages.
+
+If $I_0$ is the irradiance on the surface of an object, the "irradiance" entering the body of the object is given by $I_0 \times (1 - R^\mathrm{tot})$. The irradiance exiting the opposite side of the object is given by  $I_0 \times T^\mathrm{tot}$.
+
+Internal transmittance $T^\mathrm{int}$ considers only the radiation entering the object, thus,
+
+$$1 = A_\mathrm{fr} + T^\mathrm{int}$$
+from which it follows that always 
+$T^\mathrm{int} \geq T^\mathrm{tot}$. To convert $T^\mathrm{int}$ into $T^\mathrm{tot}$ we need to know $R^\mathrm{tot}$,
+
+$$T^\mathrm{tot} = T^\mathrm{int} \times (1 - R^\mathrm{tot})$$
+and 
+$$T^\mathrm{int} = \frac{T^\mathrm{tot}}{1 - R^\mathrm{tot}}$$
+
+
+
+
 ::: table*
 ::: center
 |   Symbol         |       Unit       | Description                        |
@@ -403,15 +467,25 @@ A _pigment_ is a light absorbing chemical or biochemical molecule. Which wavelen
 | $n$              | numeric        | Refractive index:                    |
 | $T^\mathrm{tot}$ | fraction         | Total transmittance:               |
 | $T^\mathrm{int}$ | fraction        | Internal transmittance:             |
-| $Afr$            | fraction         | Absorptance:               |
-| $A$              | fraction         | Absorbance:               |
+| $A_\mathrm{fr}$   | fraction         | Absorptance:               |
+| $A$              | a.u.            | Absorbance:               |
 | $xxx$            |                  | Molar attenuation:
+
+: Physical quantities that describe the interaction of objects and light and related quantities describing intensive properties of materials. {#tbl-light-matter-quantites}
+
 :::
 :::
 
-As for radiation a table with symbols, equations, units and definitions.
+## Further Reading
 
-A, Afr, Tfr, Rfr, n (internal, total, specular, etc.)
+The book _The Optics of Life_ [@Johnsen2012] gives a detailed account of the different aspects of optics as the relate to organisms. Although animales are emphasized more than plants in the examples, overall it is highly relevant plant biologists.
 
-Also intensive quantities describing properties.
+The classic book _Biophysical Ecology_ [@Gates2012] covers a broader range of subjects and discusses implications for Ecology. It is relevant to the current and to the following chapter.
 
+The book _Photobiology: The Science of Light and Life_ [@Bjoern2015] covers widely photobiology of animals and  plants and includes introductory chapters on the physics of light.
+
+## Technical References
+
+The _Compendium of Chemical Terminology_ [@IUPAC2020] ("IUPAC Gold Book") provides up-to-date guidelines on the use of terminology and symbols used in chemistry including photochemistry. 
+
+NIST publication 330 [@Newell2019] describes the International System of Units (SI) in great detail, and together with the IUPAC Gold Book can help clarify the use of units in  and technical publications.
