@@ -8,7 +8,7 @@ format:
     embed-resources: true
 editor: source
 abstract: | 
-  This chapter discusses radiation-physics and optics from the point of view of biological systems and their scientific and practical study.
+  This chapter discusses radiation-physics and optics from the point of view of biological systems and their scientific and practical study. It provides the foundation for subsequent chapters in the book.
 draft: false
 ---
 
@@ -21,6 +21,29 @@ library(photobiologyFilters)
 ```
 
 **I have retained the use of quantity symbols and names from the first edition. The SI system was updated in 2018 and the IUPAC Gold Book in 2020. I/we have to check that the symbols and nomenclature we use are up-to-date with these updates.**
+
+## Introduction
+
+Most if not all organisms are in a way or another directly dependent on light [@Bjoern2015]. For humans and most animals, vision is necessary for navigation and communication. Body colour can both enhance visibility and serve as camouflage. For photoautotrophs like plants, light is a source of energy for growth when captured through photosynthesis, but also when sensed through photoreceptors, a source of information. Flower colours and visual patterns are a means of light-mediated communication [@fig-potentilla]. 
+
+::: {#fig-potentilla layout-ncol=2}
+
+![VIS](images/potentilla-vis.jpg){#fig-potentilla-vis}
+
+![UV-A1](images/potentilla-uv.jpg){#fig-potentilla-uva}
+
+Flowers of _Potentilla_ in the French Alps. The pattern visible in the UVA photographs is visible to bees and bunblebees, but not to humans. The UV-absorbing pigments could function both in communication and in protection by preventing reflection of UV radiation onto the anthers.
+:::
+
+As a source of energy, radiation if in excess, can damage unprotected tissues through uncontrolled photochemical reactions, i.e., by UV-B exposure breaking bonds in molecules [e.g., @xxxxx]. However, these short wavelengths together with longer wavelengths make organisms and objects warmer when they are absorbed. Thus, radiation-driven overheating can also damage tissues and cause the death of organisms, including plants [e.g., @xxxxx]. 
+
+Depending on the intensity and timing, radiation of any wavelength from UV-B to thermal infrared can be damaging or beneficial to organisms, including plants. For a given exposure to radiation, the optical properties of vegetation, plants, individual organs such as leaves, tissues, cells and even organelles modulate the fate of the incident energy: radiation that is not absorbed or that is safely dissipated after absorption does not cause damage.
+
+Sensing of light through photoreceptors [@fig-photoreceptors] as well as its conversion into chemical energy by photosynthesis, start at a photochemical reaction where one (or occasionally two or more) photons transfer energy to a pigment molecule to excite it. Quantum physics helps explain phenomena observable at larger scales.
+
+![The range of wavelengths sensed through different higher-plant photoreceptors in _daylight_.](){#fig-photoreceptors}
+
+From the perspective of research methods, radiation needs to be quantified in a way relevant to the object under study. The optical properties of experimental set-ups, need to be adjusted to the aims of each experiment and, crucially, have to be accurately described. In many cases, understanding of what is under study also depends on the description of the optical properties of plants or their parts. This makes it necessary for those doing research in photobiology to have a good command of how UV, visible and infrared radiation interact with objects and organisms. The aim of this chapter is to provide a foundation for later chapters in the book. 
 
 ## Wavelength and Colour
 
