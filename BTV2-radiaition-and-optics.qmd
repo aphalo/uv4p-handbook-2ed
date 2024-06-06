@@ -35,13 +35,38 @@ Most if not all organisms are in a way or another directly dependent on light [@
 Flowers of _Potentilla_ in the French Alps. The pattern visible in the UVA photographs is visible to bees and bunblebees, but not to humans. The UV-absorbing pigments could function both in communication and in protection by preventing reflection of UV radiation onto the anthers.
 :::
 
-As a source of energy, radiation if in excess, can damage unprotected tissues through uncontrolled photochemical reactions, i.e., by UV-B exposure breaking bonds in molecules [e.g., @xxxxx]. However, these short wavelengths together with longer wavelengths make organisms and objects warmer when they are absorbed. Thus, radiation-driven overheating can also damage tissues and cause the death of organisms, including plants [e.g., @xxxxx]. 
+As a source of energy, short wavelength radiation, if in excess, can damage unprotected tissues through uncontrolled photochemical reactions, i.e., by UV-B exposure breaking bonds in molecules [e.g., @xxxxx]. However, these short wavelengths together with longer wavelengths make organisms and objects warmer when they are absorbed. Thus, radiation-driven overheating can also damage tissues and cause the death of organisms, including plants [e.g., @xxxxx]. 
 
 Depending on the intensity and timing, radiation of any wavelength from UV-B to thermal infrared can be damaging or beneficial to organisms, including plants. For a given exposure to radiation, the optical properties of vegetation, plants, individual organs such as leaves, tissues, cells and even organelles modulate the fate of the incident energy: radiation that is not absorbed or that is safely dissipated after absorption does not cause damage.
 
-Sensing of light through photoreceptors [@fig-photoreceptors] as well as its conversion into chemical energy by photosynthesis, start at a photochemical reaction where one (or occasionally two or more) photons transfer energy to a pigment molecule to excite it. Quantum physics helps explain phenomena observable at larger scales.
+Sensing of light through photoreceptors as well as its conversion into chemical energy by photosynthesis, start at a photochemical reaction where one (or occasionally two or more) photons transfer energy to a pigment molecule to excite it [@fig-photoreceptors]. Quantum physics helps explain phenomena observable at larger scales, such as action spectra for whole-plant responses.
 
-![The range of wavelengths sensed through different higher-plant photoreceptors in _daylight_.](){#fig-photoreceptors}
+```{r, echo=FALSE, fig.asp=0.33}
+#| label: fig-photoreceptors
+#| fig-cap: Range of wavelengths sensed through different higher-plant photoreceptor families and driving photosynthesis. A&#58; photosynthesis, CRY&#58; criptochromes 1 and 2, PHOT&#58; phototropins 1 and 2, ZTL&#58; Zeitloupe, UVR8&#58; "UV-B" photoreceptor, PHY&#58; phytochromes A/B/C/D/E. A dark wide bar indicates wavelengths of high and well demonstrated activity and narrower lighter coloured bars wavelengths for which activity is less important or uncertain. The vertical dashed line indicates the shortest wavelength in sunlight at ground level.
+
+photoreceptors.df <- data.frame(
+  Receptor = factor(c("UVR8", "PHOT", "CRY", "ZTL", "PHY", "PHY", "A"), 
+  levels = c("UVR8", "ZTL", "PHOT", "CRY", "PHY", "A")),
+  low.wl = c(260, 360, 350, 350, 590, NA, 400),
+  high.wl = c(340, 480, 500, 410, 780, NA, 700),
+  min.wl = c(250, 350, 320, 350, 580, 350, 370),
+  max.wl = c(350, 500, 600, 490, 790, 480, 750)
+)
+
+ggplot(photoreceptors.df, aes(y = Receptor)) +
+  geom_vline(xintercept = 293, linetype = "dashed") +
+  geom_segment(aes(x = low.wl, xend= high.wl, 
+                   colour = ifelse(Receptor == "A", "orange", "black")), 
+               linewidth = 5, na.rm = TRUE) +
+  geom_segment(aes(x = min.wl, xend= max.wl, 
+                   colour = ifelse(Receptor == "A", "orange", "black")), linewidth = 3, alpha = 0.4) +
+scale_x_continuous(name = "Wavelength (nm)", 
+                   breaks = (1:9) * 100) +
+scale_color_identity() +
+theme_minimal()
+
+```
 
 From the perspective of research methods, radiation needs to be quantified in a way relevant to the object under study. The optical properties of experimental set-ups, need to be adjusted to the aims of each experiment and, crucially, have to be accurately described. In many cases, understanding of what is under study also depends on the description of the optical properties of plants or their parts. This makes it necessary for those doing research in photobiology to have a good command of how UV, visible and infrared radiation interact with objects and organisms. The aim of this chapter is to provide a foundation for later chapters in the book. 
 
