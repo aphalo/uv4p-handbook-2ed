@@ -43,14 +43,14 @@ Sensing of light through photoreceptors as well as its conversion into chemical 
 
 ```{r, echo=FALSE, fig.asp=0.33}
 #| label: fig-photoreceptors
-#| fig-cap: Range of wavelengths sensed through different higher-plant photoreceptor families and driving photosynthesis. A&#58; photosynthesis, CRY&#58; criptochromes 1 and 2, PHOT&#58; phototropins 1 and 2, ZTL&#58; Zeitloupe, UVR8&#58; "UV-B" photoreceptor, PHY&#58; phytochromes A/B/C/D/E. A dark wide bar indicates wavelengths of high and well demonstrated activity and narrower lighter coloured bars wavelengths for which activity is less important or uncertain. The vertical dashed line indicates the shortest wavelength in sunlight at ground level.
+#| fig-cap: Range of wavelengths sensed through different higher-plant photoreceptor families or able to drive photosynthesis. A&#58; photosynthesis, CRY&#58; criptochromes 1 and 2, PHOT&#58; phototropins 1 and 2, ZTL&#58; Zeitloupe, UVR8&#58; "UV-B" photoreceptor, PHY&#58; phytochromes A/B/C/D/E. A dark wide bar indicates wavelengths of high and well demonstrated activity and narrower lighter coloured bars wavelengths for which activity is less important or uncertain. The vertical dashed line indicates the shortest wavelength in sunlight at ground level.
 
 photoreceptors.df <- data.frame(
   Receptor = factor(c("UVR8", "PHOT", "CRY", "ZTL", "PHY", "PHY", "A"), 
   levels = c("UVR8", "ZTL", "PHOT", "CRY", "PHY", "A")),
   low.wl = c(260, 360, 350, 350, 590, NA, 400),
   high.wl = c(340, 480, 500, 410, 780, NA, 700),
-  min.wl = c(250, 350, 320, 350, 580, 350, 370),
+  min.wl = c(250, 340, 320, 340, 560, 350, 370),
   max.wl = c(350, 500, 600, 490, 790, 480, 750)
 )
 
