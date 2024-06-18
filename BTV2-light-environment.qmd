@@ -1,29 +1,147 @@
 ---
 title: "Light Environment"
-subtitle: "From BTV1 Intro translated to Quarto"
-format: html
-editor: visual
+subtitle: "Based on BTV 1ed _1. Introduction_"
+author: "Pedro J. Aphalo with Andreas Albert, Lars Olof Björn, Lasse Yliantilla"
+date: 2024-06-17
+date-modified: 2024-06-17
+bibliography: handbook-ch02.bib
+format:
+  html:
+    embed-resources: false
+editor: source
+abstract: | 
+  This chapter discusses the light environment of terrestrial and aquatic plants. It provides the foundation for subsequent chapters in the book.
+draft: true
 ---
+
+```{r, include=FALSE, message=FALSE}
+library(photobiology)
+library(photobiologySun)
+library(ggspectra)
+library(ggpp)
+```
 
 ## Solar radiation at ground level {#sec:solar:radiation}
 
 ### Position of the sun
 
-When dealing with solar radiation, we frequently need to describe the position of the sun. The azimuth angle ($\phi$) is usually measured clockwise from the North on a horizontal plane. The position on the vertical plane is measured either as the zenith angle ($\theta$) downwards from the zenith, or as an elevation angle ($h$) upwards from the horizon. Consequently $h + \theta = 90^\circ = \frac{\pi}{2}\,$radians. See Figure [\[fig:solar:position\]](#fig:solar:position){reference-type="ref" reference="fig:solar:position"} for a diagram. In contrast to Figure [\[fig_space\]](#fig_space){reference-type="ref" reference="fig_space"} and the discussion in section [1.3](#sec:radiation:properties){reference-type="ref" reference="sec:radiation:properties"} where the point radiation source is located at the origin of the system of coordinates, when describing the position of the sun as in Figure [\[fig:solar:position\]](#fig:solar:position){reference-type="ref" reference="fig:solar:position"} the observer is situated at the origin.
+When studying plants we frequently need to describe the position of the sun because of its effect on spectral irradiance and as a determinant of day length. The azimuth angle ($\phi$) is usually measured clockwise from the North on a horizontal plane. The position on the vertical plane is measured either as the zenith angle ($\theta$) downwards from the zenith, or as an elevation angle ($h$) upwards from the horizon. Consequently $h + \theta = 90^\circ = \frac{\pi}{2}\,$radians. When describing the position of the sun as in @fig-solar-position the observer is situated at the origin of the system of coordinates used to describe the angles.
 
-::: figure*
-![image](figures/solar_position.pdf){width="0.6\\myfigwidth"}
+![Diagram showing the angles used to describe the position of the sun in the sky, viewed from the East. h: sun elevation angle, θ: zenith angle, Φ: azimuth angle.](figures/solar-position.png){#fig-solar-position width=67%}
+
+The daily path of the sun in the sky depends on the time of the year and the latitude. The time of solar noon depends on the actual geographic location, and nearly always differs from the local-time noon which is based on a time zone and possibly affected by a shift of one or more hours to enhance daylight use, especially in summer time.
+
+Highly accurate astronomical formulas are available and can be used to compute the current, past and future positions of the sun in the sky [e.g., @Meeus1998]. Less accurate, but simpler to compute, formulas also exist. These formulas can also be use to compute day- and night lengths based on different twilight definitions.
+
+::: callout-note
+The accuracy of astronomical formulas is less when the sun is near the horizon because, as seen in the previous chapter, the transition from vacuum to the atmosphere introduces a small angular displacement of the light beam depending on the refractive index and angle of incidence. The difficulty is that the refractive index ($\nu$) of the air depends on its water content, which is not constant.
 :::
 
-The path of the sun in the sky depends on the time of the year and latitude. The time of solar noon differs from the local time noon which is based on a time zone and possibly daylight saving shift. Highly accurate astronomical formula are available and can be used to compute the current, past and future positions of the sun.
+The path of the sun in the sky determines the lengths of the day and night. The most frequently used criterion for the day to night and night to days transitions is that the upper rim of the solar disk coincides with the astronomical horizon. As the solar disk is approximately 2 degrees in diameter, the transition between day and night is in this case when the centre of the solar disk is one degree below the horizon. Alternatively, the centre of the solar disk can be used coinciding with the astronomical horizon can be used as the criterion.
 
+![Position of the sun at sunrise, sunset, dawn and dusk. Figure by TWCarlson available at [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Twilight_description_full_day.svg) under CC-BY-SA 3.0.](images/twilight-full-day.png){#fig-twilight-full-day width=67%}
+
+Twilight is the period before sunrise and after sunset when there is more intense diffuse light than further into the night (@fig-twilight-full-day). The definitions of twilight are based on practical considerations of human activities, and called *civil*, *naval* and *astronomical* (@fig-twilight-angles). During civil twilight artificial lighting is usually not needed in cities. For nautical twilight I have seen two descriptions: 1) before nautical dawn and after nautical dawn it is possible to navigate based on the stars, and 2) after nautical dawn and before nautical dusk navigation by sight is possible. Before astronomical dawn and after astronomical dusk stars of sixth magnitude are visible. These three descriptions are very approximate, as they do not consider the effect of clouds, light polution from artificial sources, or other source of light.
+
+![Criteria defining twilight based on the position of the sun. The angles when expressed as sun elevation ($h$) are negative. Only dawn and sunrise shown. The same angles are used between sunset and dusk. Figure by TWCarlson available at [Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Twilight_description_full_day.svg) under CC-BY-SA 3.0., edited](images/twilight-dawn-angles.png){#fig-twilight-angles width=67%}
+
+```{r}
+#| label: fig-day-length
+#| fig-cap: Day length through the year at different latitudes.
+
+
+```
+
+::: callout-tip
+Even though day length or photoperiod duration is normally based on the astronomical horizon, in many cases there are obstacles that occlude the sun from view until later at dawn or earlier at dusk: mountains, vegetation, buildings, etc. Thus, in some cases it may be more relevant for a scientific study with plants to consider sun elevation angles $h > 0$ as the criterion; even different angles can be used for day start and day end.
+
+The question remains of what light level is actually detected by plants and other organisms as the night-day and day-night transitions. Most likely the exact value depends on the genotype and the realized phenotype. However, at dawn and dusk irradiance increases and decreases, respectively, fast at low and medium latitudes. At high latitudes, at some times the year twilight lasts for a long time making the change in irradiance more gradual.
+:::
+
+
+***Add examples and link to previous chapter***
 
 ### The spectrum of solar radiation
 
-Ultraviolet, visible and infrared radiation (taken together called in meteorolgy _shortwave radiation_) are components of solar radiation. Radiation from the sun reaches the Earth's surface in about eight minutes ($t$ = time, $r_0$ = distance sun to earth, $c$ = velocity of light in vacuum): $$t = \frac{r_0}{c} \approx \frac{150 \times 10^9 ~{\rm m}}{3 \times 10^8 ~\frac{\rm m}{\rm s}} = 500 ~{\rm s} = 8.3 ~{\rm min}$$.
+The solar spectrum at the top of the atmosphere varies very little in time, and is usually assumed constant.
 
-The basis of all passive measurements is the incoming solar radiation, which can be estimated from the known activity of the sun ('productivity of photons'), that can be approximated by the emitted spectral radiance () described by Planck's law of black body radiation at temperature $T$, measured in degrees Kelvin (K): $$L_s(\lambda,T) = \frac{2hc^2}{\lambda^5}\cdot\frac{1}{\exp\left\{hc/k_BT\lambda\right\}-1} \label{equ_planck}
-\radiance[s](\lambda,T) = \frac{2hc^2}{\lambda^5}\cdot\frac{1}{\mathrm{e}^{(hc/k_\mathrm{B}T\lambda)}-1} \label{equ_planck}$$ with Boltzmann's constant $k_\mathrm{B}=1.381\times 10^{-23}$ . The brightness temperature of the sun can be determined by Wien's displacement law, which gives the peak wavelength of the radiation emitted by a blackbody as a function of its absolute temperature $$\lambda_{max} \cdot T = 2.898 \times 10^6 \,{\rm nm\,K} \label{equ_wien}$$ This means that for a maximum emission of the sun at about 500 nm the temperature of the sun surface is about 5800 K. The spectral irradiance of the sun $\irr[s](\lambda)$ can be estimated assuming a homogeneous flux and using the correlation of intensity and radiance from their definitions in table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}. The intensity of the sun $\intensity[s](\lambda)$ is given by the radiance $\radiance[s](\lambda)$ multiplied by the apparent sun surface (a non-tilted disk of radius $r_s=7\times 10^5$ km). To calculate the decreased solar irradiance at the moment of reaching the Earth's atmosphere, the distance of the sun to the Earth ($r_0=150\times 10^6$ km) has to be taken into account due to the inverse square law of irradiance of equation ([\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}). Thus, the extraterrestrial solar irradiance is $$\irr[s](\lambda)=\radiance[s](\lambda)\cdot\frac{\pi r_s^2}{r_0^2}\label{equ_extraterrestrial}$$ Remembering the solid angle of equation ([\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"}), the right multiplication factor represents the solid angle of the sun's disk as seen from the Earth's surface ($\approx 6.8\times 10^{-5}$ sr). Figure [\[fig_sun\]](#fig_sun){reference-type="ref" reference="fig_sun"} shows the spectrum of the measured extraterrestrial solar radiation (Wehrli, 1985)[^1] and the spectrum calculated by equation 1.14 using Planck's law of equation 1.12 at a black body temperature of 5800 K. Integrated over all wavelengths, $\irr[s]$ is about 1361 to 1362 at top of the atmosphere [@Kopp2011]. This value is called the 'solar constant'. In former times, depending on different measurements, $\irr[s]$ varies by a few percent [@iqbal83]. For example, the irradiance at the top of the atmosphere (the integrated value) changes by $\pm 50$ (3.7 %) during the year due to distance variation caused by orbit excentricity [@moble94]. More accurate measurements during the last 25 years by spaceborne radiometers show a variability of the solar radiation of a few tenth of a percent. A detailed analysis is given by @froeh04. $\irr[s]$ can also be calculated by the Stefan-Boltzmann Law: the total energy emitted from the surface of a black body is proportional to the fourth power of its temperature. For an isotropically emitting source (Lambertian emitter), this means $$\radiance = \frac{\sigma}{\pi} \cdot T^4 \label{equ_boltzmann}$$ with the Stefan-Boltzmann constant $\sigma=5.6705\times 10^{-8}$ W m$^{-2}$ K$^{-4}$. With $T = 5800$ K equation [\[equ_boltzmann\]](#equ_boltzmann){reference-type="ref" reference="equ_boltzmann"} gives the radiance of the solar disc. From this value, we can obtain an approximation of the solar constant, by taking into account the distance from the Earth to the Sun and the apparent size of the solar disc (see equations [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and [\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}).
+In outer space, in vacuum, no scattering takes place as the light travels, and because of this, the sky looks completely black. Planets and the Moon do reflect light allowing us to see them.
+
+Before reaching the Earth's surface radiation from the sun travels through the atmosphere. The sun elevation angle affects the length of the path that the light arriving from the sun travels through the atmosphere. In atmospheric physics it is common to describe spectra as for *AM1* when the sun is at the zenith, i.e., *AM1* stands for one atmosphere thickness and *AM1.5* indicates that the length of the path through the atmosphere is 1.5 times that when the sun is at the zenith.
+
+The length of the path through the atmosphere is, in reality, not exactly the length computed by trigonometry, but close to it. An empirical formula can be used as an approximation [@Kasten1989] to compute AM from the elevation angle ($h$).  
+
+```{r, echo=FALSE}
+#| label: fig-AM-h
+h <- 1:90
+AMx <- relative_AM(h)
+ggplot(data.frame(h, AMx), aes(h, AMx)) +
+  geom_line(linewidth = 1) +
+  scale_x_continuous(name = expression("Sun elevation angle, "*h),
+                     breaks = c(0, 30, 60, 90),
+                     sec.axis = sec_axis(transform = function(x) {90 - x},
+                     name = expression("Zenith angle, "*theta))) +
+  scale_y_continuous(name = "AM") +
+  theme_minimal()
+```
+
+Light when travelling through the atmosphere interacts with the gases and particles composing it. The light is attenuated and scattered . Different wavelengths are differently affected by these processes, giving us a blue sky and warmer coloured direct sunlight. In other words, the daylight spectrum depends on the position of the sun in the sky, and on the composition of the atmosphere along this path (@fig-sun-spectra-energy and @fig-sun-spectra-photons). In addition to molecular absorption and scattering, aerosols, both liquid like water and solid like ice and dust, interact with light.
+
+```{r, echo=FALSE}
+#| label: fig-sun-spectra-energy
+#| fig-cap: The spectrum of solar radiation above the atmosphere (AM0) and a typical spectrum at ground level (AM1.5). Spectral energy irradiance for _shortwave radiation_.
+
+ggplot(clip_wl(sun_reference.mspct[c("WMO.Wehrli.AM0",
+                                     "ASTM.G173.global")],
+               range=c(NA,3000)), unit.out = "energy") + 
+  aes(color= spct.idx) +
+  geom_line() +
+  scale_color_manual(name= "",
+                     labels=c("AM0","AM1.5"),
+                  values=c("purple","blue")) +
+  scale_x_wl_continuous() + 
+  scale_y_s.e.irrad_continuous(expand=c(0,0))  +
+  annotate(geom= "text",
+           x =c(750,950,1150,1450,1900),
+           y =c(0.1,0.1,0.7,0.5,0.3),
+           label=c("O[2]","H[2]*O","H[2]*O","H[2]*O","H[2]*O~CO[2]"),
+           parse= TRUE) +
+  theme_minimal() +
+  theme(legend.position= "top")
+```
+
+
+```{r, echo=FALSE}
+#| label: fig-sun-spectra-photons
+#| fig-cap: The spectrum of solar radiation above the atmosphere (AM0) and a typical spectrum at ground level (AM1.5). Spectral photon irradiance for the range 250 to 900 nm.
+
+ggplot(clip_wl(sun_reference.mspct[c("WMO.Wehrli.AM0",
+                                     "ASTM.G173.global")],
+               range=c(240,1000)), unit.out = "photon") + 
+  aes(color = spct.idx) +
+  geom_line() +
+  scale_color_manual(name= "",
+                     labels=c("AM0","AM1.5"),
+                  values=c("purple","blue")) +
+  scale_x_wl_continuous() + 
+  scale_y_s.q.irrad_continuous(expand=c(0,0))  +
+  theme_minimal() +
+  theme(legend.position= "top")
+```
+
+Above, we used the word *light* with its everyday meaning. Its technical definition is of radiation visible to humans. Ultraviolet, visible and infrared radiation (taken together are called in meteorolgy *shortwave radiation*) are components of solar radiation.
+
+::: callout-note
+Radiation from the sun reaches the Earth's surface in about eight minutes ($t$ = time, $r_0$ = distance sun to earth, $c$ = velocity of light in vacuum): $$t = \frac{r_0}{c} \approx \frac{150 \times 10^9 ~{\rm m}}{3 \times 10^8 ~\frac{\rm m}{\rm s}} = 500 ~{\rm s} = 8.3 ~{\rm min}$$.
+:::
+
+The radiance () of radiation from the sun is similar, but not identical, to the emission spectrum of a *black body* at a temperature of 5800 K. Planck's law describes black body emission at temperature $T$, expressed as absolute temperature measured in degrees Kelvin (K):
+
+$$L_s(\lambda,T) = \frac{2hc^2}{\lambda^5}\cdot\frac{1}{\exp\left\{hc/k_BT\lambda\right\}-1} \label{equ_planck} \radiance[s](\lambda,T) = \frac{2hc^2}{\lambda^5}\cdot\frac{1}{\mathrm{e}^{(hc/k_\mathrm{B}T\lambda)}-1} \label{equ_planck}$$
+
+with Boltzmann's constant $k_\mathrm{B}=1.381\times 10^{-23}$ .
+
+The brightness temperature of the sun can be determined by Wien's displacement law, which gives the peak wavelength of the radiation emitted by a blackbody as a function of its absolute temperature $$\lambda_{max} \cdot T = 2.898 \times 10^6 \,{\rm nm\,K} \label{equ_wien}$$ This means that for a maximum emission of the sun at about 500 nm the temperature of the sun surface is about 5800 K. The spectral irradiance of the sun $\irr[s](\lambda)$ can be estimated assuming a homogeneous flux and using the correlation of intensity and radiance from their definitions in table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}. The intensity of the sun $\intensity[s](\lambda)$ is given by the radiance $\radiance[s](\lambda)$ multiplied by the apparent sun surface (a non-tilted disk of radius $r_s=7\times 10^5$ km). To calculate the decreased solar irradiance at the moment of reaching the Earth's atmosphere, the distance of the sun to the Earth ($r_0=150\times 10^6$ km) has to be taken into account due to the inverse square law of irradiance of equation ([\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}). Thus, the extraterrestrial solar irradiance is $$\irr[s](\lambda)=\radiance[s](\lambda)\cdot\frac{\pi r_s^2}{r_0^2}\label{equ_extraterrestrial}$$ Remembering the solid angle of equation ([\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"}), the right multiplication factor represents the solid angle of the sun's disk as seen from the Earth's surface ($\approx 6.8\times 10^{-5}$ sr). Figure [\[fig_sun\]](#fig_sun){reference-type="ref" reference="fig_sun"} shows the spectrum of the measured extraterrestrial solar radiation (Wehrli, 1985)[^1] and the spectrum calculated by equation 1.14 using Planck's law of equation 1.12 at a black body temperature of 5800 K. Integrated over all wavelengths, $\irr[s]$ is about 1361 to 1362 at top of the atmosphere [@Kopp2011]. This value is called the 'solar constant'. In former times, depending on different measurements, $\irr[s]$ varies by a few percent [@iqbal83]. For example, the irradiance at the top of the atmosphere (the integrated value) changes by $\pm 50$ (3.7 %) during the year due to distance variation caused by orbit excentricity [@moble94]. More accurate measurements during the last 25 years by spaceborne radiometers show a variability of the solar radiation of a few tenth of a percent. A detailed analysis is given by @froeh04. $\irr[s]$ can also be calculated by the Stefan-Boltzmann Law: the total energy emitted from the surface of a black body is proportional to the fourth power of its temperature. For an isotropically emitting source (Lambertian emitter), this means $$\radiance = \frac{\sigma}{\pi} \cdot T^4 \label{equ_boltzmann}$$ with the Stefan-Boltzmann constant $\sigma=5.6705\times 10^{-8}$ W m$^{-2}$ K$^{-4}$. With $T = 5800$ K equation [\[equ_boltzmann\]](#equ_boltzmann){reference-type="ref" reference="equ_boltzmann"} gives the radiance of the solar disc. From this value, we can obtain an approximation of the solar constant, by taking into account the distance from the Earth to the Sun and the apparent size of the solar disc (see equations [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and [\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}).
 
 [^1]: Available as ASCII file at PMODWRC, <ftp://ftp.pmodwrc.ch/pub/publications/pmod615.asc>
 
