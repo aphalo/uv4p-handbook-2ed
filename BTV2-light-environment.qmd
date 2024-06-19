@@ -15,6 +15,7 @@ draft: true
 ---
 
 ```{r, include=FALSE, message=FALSE}
+library(dplyr)
 library(photobiology)
 library(photobiologySun)
 library(ggspectra)
@@ -74,31 +75,38 @@ ggplot(times,
   theme_minimal() + theme(legend.position = "top")
 ```
 
-If we include twilight, the day-length estimates become longer.
+If we include twilight, the estimated length of the photoperiod increases (@fig-daylength-twilight).
 
-```{r}
+```{r, echo=FALSE}
+#| label: fig-daylength-twilight
+#| fig-cap: Photoperiod duration computed for sunrise/sunset or for dawn/dusk according to different twilight definitions. The curve describes the elevation angle of the sun through the day at Helsinki, Finalnd, on the 21 March 2024. The horizontal lines show the elevation angles used as the boundary of the "photoperiod" and the numbers above each of these lines give the corresponding length of the photoperiod in hours.
+
 geocode_He <- data.frame(lon = 24.93838, lat = 60.16986)
-hours <- seq(from = ymd_hm("2010-03-21 00:00", tz = "EET"),
+hours <- seq(from = ymd_hm("2024-03-21 00:00", tz = "EET"),
              by = "1 min",
              length.out = 24 * 60)
 angles_He <- sun_angles(hours,
                         geocode = geocode_He)
 
-twilight <-
+twilight.tb <-
   data.frame(angle = c(-1, -6, -12, -18),
-             location = c("Horizon", "Civil",
+             location = factor(c("Horizon", "Civil",
                        "Nautical",
-                       "Astronomical"),
+                       "Astronomical"), 
+                       levels = c("Horizon", "Civil",
+                       "Nautical",
+                       "Astronomical")),
              time = min(hours))
 
 get_middle_rows <- 
   function(x) {
     z <- x[nrow(x) %/% 2 + -1:2, ]
-    daylength <- numeric(nrow(x))
+    z$twilight <- twilight.tb$angle
+    daylength <- numeric(nrow(z))
     for (i in 1:nrow(z)) {
       daylength[i] <- day_length(date = z[i, ]$time, 
                                geocode = geocode_He,
-                               twilight = z[i, ]$angle)
+                               twilight = z[i, ]$twilight)
     }
     z$daylength <- round(daylength, digits = 1L)
     z
@@ -106,18 +114,17 @@ get_middle_rows <-
 
 ggplot(angles_He,
        aes(x = time, y = elevation)) +
-  geom_line() +
-  geom_hline(data=twilight,
-             aes(yintercept = angle, linetype=factor(location))) +
+  geom_line(linewidth = 1) +
+  geom_hline(data = twilight.tb,
+             aes(yintercept = angle, linetype = location),
+             linewidth = 0.5) +
   geom_text(data = get_middle_rows,
-            mapping = aes(label = ,
-            y = angle + 2, x = time)) +
-  # annotate(geom="text",
-  #          x=twilight$time, y=twilight$angle,
-  #          label=twilight$label, vjust=-0.4, hjust = 0, size=4) +
-  labs(y = "Sun elevation at Helsinki (degrees)",
-       x = "Time UTC", linetype = "Dawn/dusk") +
-  theme_minimal()
+            mapping = aes(label = paste(daylength, "h"),
+            y = twilight + 2, x = time)) +
+  scale_x_datetime(date_labels = "%H:%M", expand = expansion(0.02, 0.02)) +
+  labs(y = "Sun elevation angle at Helsinki (degrees)",
+       x = "Time UTC + 2 (hh:mm)", linetype = "Dawn/dusk") +
+  theme_minimal() + theme(legend.position = "top")
 ```
 
 ::: callout-tip
@@ -126,18 +133,79 @@ Even though day length or photoperiod duration is normally based on the astronom
 The question remains of what light level is actually detected by plants and other organisms as the night-day and day-night transitions. Most likely the exact value depends on the genotype and the realized phenotype. However, at dawn and dusk irradiance increases and decreases, respectively, fast at low and medium latitudes. At high latitudes, at some times the year twilight lasts for a long time making the change in irradiance more gradual.
 :::
 
+The dependency of the elevation angle on time of the year and latitude is ellustrated in @fig-sun-elevation-world.
 
-***Add examples and link to previous chapter***
+```{r, echo=FALSE}
+#| label: fig-sun-elevation-world
+#| fig-cap: Sun elevation angle through the day at five different latitudes and four dates. The horizontal dotted lines show the horizon ($h = 0$). The range limits for the _x_ and _y_ axes are consistent  across all plots. 
+
+make_sun_elevation_plot <- function(date, geocode) {
+  # 97 points in time from midnight to midnight
+  t <- rep(date, 24 * 4 + 1) +
+         hours(c(rep(0:23, each = 4), 24)) +
+         minutes(c(rep(c(0, 15, 30, 45), times = 24), 0))
+  e <- sun_elevation(time = t, geocode = geocode)
+  ggplot(data.frame(t, e), aes(t, e)) +
+    geom_hline(yintercept = 0, linetype = "dotted") +
+    geom_line() +
+    expand_limits(y = c(-90, 90)) +
+    scale_x_datetime(date_labels = "%H:%m", expand = expansion()) +
+    scale_y_continuous(expand = expansion()) +
+    theme_void() +
+    theme(panel.background = element_rect(fill = "grey95",
+                                          color = NA),
+          panel.border = element_blank())
+}
+
+dates <- ymd(c("2020-02-20", "2020-03-21", "2020-6-21",
+               "2020-09-21", "2020-12-21", "2021-01-22"))
+date.ticks <- dates[2:5]
+date.ends <- dates[c(1, 6)]
+
+geocodes <-
+  tibble::tibble(lon = c(0, 0, 0, 0, 0),
+         lat = c(66.5634, 23.4394, 0, -23.4394, -66.5634),
+         address = c("Northern\nPolar\nCircle", "Tropic of\nCancer", "Equator",
+                     "Tropic of\nCapricorn", "Southern\nPolar\nCircle"))
+sun_elevation.tb <-
+  tibble::tibble(when = rep(dates, nrow(geocodes)),
+         where = rep(geocodes$address, each = length(dates)),
+         plots = c(lapply(dates, make_sun_elevation_plot, geocode = geocodes[1, ]),
+                   lapply(dates, make_sun_elevation_plot, geocode = geocodes[2, ]),
+                   lapply(dates, make_sun_elevation_plot, geocode = geocodes[3, ]),
+                   lapply(dates, make_sun_elevation_plot, geocode = geocodes[4, ]),
+                   lapply(dates, make_sun_elevation_plot, geocode = geocodes[5, ])))
+sun_elevation.tb$where <-
+  factor(sun_elevation.tb$where, levels = rev(geocodes$address))
+
+ggplot(sun_elevation.tb, aes(x = when, y = where, label = plots)) +
+  geom_plot(data = . %>% filter(day(when) == 21),
+            inherit.aes = TRUE,
+            vp.width = 0.18, vp.height = 0.15, vjust = 0.5, hjust = 0.5) +
+  scale_x_date(name = "", breaks = date.ticks,
+               limits = date.ends,
+               date_labels = "%d %b") +
+  scale_y_discrete(name = "") +
+  # labs(title = "Solar elevation through the day",
+  #      subtitle = "The dotted line indicates the horizon (h = 0)",
+  #      caption = "Inset plots are drawn using consistent x and y scale limits.") +
+  theme_minimal() +
+  theme(panel.grid.minor = element_blank(),
+        panel.grid.major = element_blank())
+```
+
+
+***Add links to previous chapter***
 
 ### The spectrum of solar radiation
 
-The solar spectrum at the top of the atmosphere varies very little in time, and is usually assumed constant.
+The solar "constant" varies between 1.361 and 1.362 $W m^{-2}$ due to changes in solar activity. The solar spectrum at the top of the atmosphere varies very little in time, and is usually assumed constant.
 
 In outer space, in vacuum, no scattering takes place as the light travels, and because of this, the sky looks completely black. Planets and the Moon do reflect light allowing us to see them.
 
-Before reaching the Earth's surface radiation from the sun travels through the atmosphere. The sun elevation angle affects the length of the path that the light arriving from the sun travels through the atmosphere. In atmospheric physics it is common to describe spectra as for *AM1* when the sun is at the zenith, i.e., *AM1* stands for one atmosphere thickness and *AM1.5* indicates that the length of the path through the atmosphere is 1.5 times that when the sun is at the zenith.
+Before reaching the Earth's surface radiation from the sun travels through the atmosphere. The sun elevation angle affects the length of the path that the light arriving from the sun travels through the atmosphere. In atmospheric physics it is common to describe spectra as corresponding to *AM1* when the sun is at the zenith, i.e., *AM1* stands for one atmosphere thickness and *AM1.5* indicates that the length of the path through the atmosphere is 1.5 times that when the sun is at the zenith.
 
-The length of the path through the atmosphere is, in reality, not exactly the length computed by trigonometry, but close to it. An empirical formula can be used as an approximation [@Kasten1989] to compute AM from the elevation angle ($h$).  
+The length of the path through the atmosphere is, in reality, not exactly the length computed by trigonometry, but close to it. An empirical formula can be used as an approximation [@Kasten1989] to compute AM values from the elevation angle ($h$) (@fig-AM-h).  
 
 ```{r, echo=FALSE}
 #| label: fig-AM-h
@@ -205,7 +273,7 @@ Above, we used the word *light* with its everyday meaning. Its technical definit
 Radiation from the sun reaches the Earth's surface in about eight minutes ($t$ = time, $r_0$ = distance sun to earth, $c$ = velocity of light in vacuum): $$t = \frac{r_0}{c} \approx \frac{150 \times 10^9 ~{\rm m}}{3 \times 10^8 ~\frac{\rm m}{\rm s}} = 500 ~{\rm s} = 8.3 ~{\rm min}$$.
 :::
 
-The radiance ($L$) of radiation from the sun is similar, but not identical, to the emission spectrum of a *black body* at a temperature of 5800 K (@fig-blackbody-emission). 
+The energy radiance ($L$) of radiation emitted by the sun is similar, but not identical, to the emission spectrum of a *black body*. The solar spectrum has a fine structure of peaks and valleys arising from the atoms and molecules in the sun while black body emission is described by a smooth curve. A "match" based on the wavelength at which spectral _energy_ radiance is at its maximum can be used as criterion to estimate the temperature of the sun's surface. Obviously, we use the extraterrestrial spectrum for this match. We see in the AM0 curve in @fig-sun-spectra-energy that the wavelength at the maximum is near 500 nm. In reality the temperature of the sun surface is not uniform, and different sources mention as its average temperatures between 5800 K and 5500 K. Comparing the AM0 curve in @fig-sun-spectra-energy to the 5800 K curve in @fig-blackbody-emission the similary of their shapes is clear.
 
 ```{r, echo=FALSE}
 #| label: fig-blackbody-emission
@@ -220,7 +288,7 @@ black_body_spectrum <- function(w.length, Tabs) {
     1 / (exp((h * c / (kB * Tabs * w.length))) - 1)
 }
 
-ggplot(data=data.frame(x=c(50,2500)), aes(x)) +
+ggplot(data=data.frame(x=c(50,3000)), aes(x)) +
   stat_function(fun=black_body_spectrum,
                 args = list(Tabs=5800),
                 colour="blue") +
@@ -241,7 +309,7 @@ $$L_s(\lambda,T) = \frac{2hc^2}{\lambda^5}\cdot\frac{1}{\mathrm{e}^{(hc/k_\mathr
 
 with Boltzmann's constant $k_\mathrm{B}=1.381\times 10^{-23}$ .
 
-The "colour temperature" of a black body is given by Wien's displacement law (@fig-wein-wl), which gives the peak wavelength of the radiation emitted by a black body as a function of its absolute temperature 
+The "equivalent temperature" of a black body is given by Wien's displacement law (@fig-wein-wl), which gives the wavelength at which the radiative energy emitted by a black body is at its maximum as a function of its absolute temperature. 
 
 $$\lambda_\mathrm{max} \cdot T = 2.898 \times 10^6 \,{\rm nm\,K}$$ 
 
@@ -265,7 +333,13 @@ ggplot(data=data.frame(Tabs = c(2000,7000)), aes(x = Tabs)) +
   theme_minimal()
 ```
 
-This means that for a maximum emission of the sun at about 500 nm the temperature of the sun surface is about 5800 K (highlighted in @fig-wein-wl). The spectral irradiance of the sun $\irr[s](\lambda)$ can be estimated assuming a homogeneous flux and using the correlation of intensity and radiance from their definitions in table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}. The intensity of the sun $\intensity[s](\lambda)$ is given by the radiance $\radiance[s](\lambda)$ multiplied by the apparent sun surface (a non-tilted disk of radius $r_s=7\times 10^5$ km). To calculate the decreased solar irradiance at the moment of reaching the Earth's atmosphere, the distance of the sun to the Earth ($r_0=150\times 10^6$ km) has to be taken into account due to the inverse square law of irradiance of equation ([\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}). Thus, the extraterrestrial solar irradiance is $$\irr[s](\lambda)=\radiance[s](\lambda)\cdot\frac{\pi r_s^2}{r_0^2}\label{equ_extraterrestrial}$$ Remembering the solid angle of equation ([\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"}), the right multiplication factor represents the solid angle of the sun's disk as seen from the Earth's surface ($\approx 6.8\times 10^{-5}$ sr). Figure [\[fig_sun\]](#fig_sun){reference-type="ref" reference="fig_sun"} shows the spectrum of the measured extraterrestrial solar radiation (Wehrli, 1985)[^1] and the spectrum calculated by equation 1.14 using Planck's law of equation 1.12 at a black body temperature of 5800 K. Integrated over all wavelengths, $\irr[s]$ is about 1361 to 1362 at top of the atmosphere [@Kopp2011]. This value is called the 'solar constant'. In former times, depending on different measurements, $\irr[s]$ varies by a few percent [@iqbal83]. For example, the irradiance at the top of the atmosphere (the integrated value) changes by $\pm 50$ (3.7 %) during the year due to distance variation caused by orbit excentricity [@moble94]. More accurate measurements during the last 25 years by spaceborne radiometers show a variability of the solar radiation of a few tenth of a percent. A detailed analysis is given by @froeh04. $\irr[s]$ can also be calculated by the Stefan-Boltzmann Law: the total energy emitted from the surface of a black body is proportional to the fourth power of its temperature. For an isotropically emitting source (Lambertian emitter), this means $$\radiance = \frac{\sigma}{\pi} \cdot T^4 \label{equ_boltzmann}$$ with the Stefan-Boltzmann constant $\sigma=5.6705\times 10^{-8}$ W m$^{-2}$ K$^{-4}$. With $T = 5800$ K equation [\[equ_boltzmann\]](#equ_boltzmann){reference-type="ref" reference="equ_boltzmann"} gives the radiance of the solar disc. From this value, we can obtain an approximation of the solar constant, by taking into account the distance from the Earth to the Sun and the apparent size of the solar disc (see equations [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and [\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}).
+::: callout-tip
+The concept of "colour temperature" used for describing the emission of lamps used for illumination and more generaly in photography differs in that it takes into account human colour vision when determining the match between the black body emission spectrum and the spectrum of an arbitrary light source.
+
+compute CCT
+:::
+
+The spectral irradiance of the sun $\irr[s](\lambda)$ can be estimated assuming a homogeneous flux and using the correlation of intensity and radiance from their definitions in table [\[tab:Phys:Quants\]](#tab:Phys:Quants){reference-type="ref" reference="tab:Phys:Quants"}. The intensity of the sun $\intensity[s](\lambda)$ is given by the radiance $\radiance[s](\lambda)$ multiplied by the apparent sun surface (a non-tilted disk of radius $r_s=7\times 10^5$ km). To calculate the decreased solar irradiance at the moment of reaching the Earth's atmosphere, the distance of the sun to the Earth ($r_0=150\times 10^6$ km) has to be taken into account due to the inverse square law of irradiance of equation ([\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}). Thus, the extraterrestrial solar irradiance is $$\irr[s](\lambda)=\radiance[s](\lambda)\cdot\frac{\pi r_s^2}{r_0^2}\label{equ_extraterrestrial}$$ Remembering the solid angle of equation ([\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"}), the right multiplication factor represents the solid angle of the sun's disk as seen from the Earth's surface ($\approx 6.8\times 10^{-5}$ sr). Figure [\[fig_sun\]](#fig_sun){reference-type="ref" reference="fig_sun"} shows the spectrum of the measured extraterrestrial solar radiation (Wehrli, 1985)[^1] and the spectrum calculated by equation 1.14 using Planck's law of equation 1.12 at a black body temperature of 5800 K. Integrated over all wavelengths, $\irr[s]$ is about 1361 to 1362 at top of the atmosphere [@Kopp2011]. This value is called the 'solar constant'. In former times, depending on different measurements, $\irr[s]$ varies by a few percent [@iqbal83]. For example, the irradiance at the top of the atmosphere (the integrated value) changes by $\pm 50$ (3.7 %) during the year due to distance variation caused by orbit excentricity [@moble94]. More accurate measurements during the last 25 years by spaceborne radiometers show a variability of the solar radiation of a few tenth of a percent. A detailed analysis is given by @froeh04. $\irr[s]$ can also be calculated by the Stefan-Boltzmann Law: the total energy emitted from the surface of a black body is proportional to the fourth power of its temperature. For an isotropically emitting source (Lambertian emitter), this means $$\radiance = \frac{\sigma}{\pi} \cdot T^4 \label{equ_boltzmann}$$ with the Stefan-Boltzmann constant $\sigma=5.6705\times 10^{-8}$ W m$^{-2}$ K$^{-4}$. With $T = 5800$ K equation [\[equ_boltzmann\]](#equ_boltzmann){reference-type="ref" reference="equ_boltzmann"} gives the radiance of the solar disc. From this value, we can obtain an approximation of the solar constant, by taking into account the distance from the Earth to the Sun and the apparent size of the solar disc (see equations [\[equ_solidangle\]](#equ_solidangle){reference-type="ref" reference="equ_solidangle"} and [\[equ_r2law\]](#equ_r2law){reference-type="ref" reference="equ_r2law"}).
 
 [^1]: Available as ASCII file at PMODWRC, <ftp://ftp.pmodwrc.ch/pub/publications/pmod615.asc>
 
