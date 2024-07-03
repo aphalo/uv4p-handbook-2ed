@@ -130,10 +130,10 @@ ggplot(angles_He,
 ::: callout-tip
 Even though day length or photoperiod duration is normally based on the astronomical horizon, in many cases there are obstacles that occlude the sun from view until later at dawn or earlier at dusk: mountains, vegetation, buildings, etc. Thus, in some cases it may be more relevant for a scientific study with plants to consider sun elevation angles $h > 0$ as the criterion; even different angles can be used for day start and day end.
 
-The question remains of what light level is actually detected by plants and other organisms as the night-day and day-night transitions. Most likely the exact value depends on the genotype and the realized phenotype. However, at dawn and dusk irradiance increases and decreases, respectively, fast at low and medium latitudes. At high latitudes, at some times the year twilight lasts for a long time making the change in irradiance more gradual.
+The question remains of what light level is actually detected by plants and other organisms as the night-day and day-night transitions. Most likely the exact value depends on the genotype and the realized phenotype. However, at dawn and dusk irradiance increases and decreases, respectively, qquite fast at low and medium latitudes. At high latitudes, at some times the year twilight lasts for a long time making the change in irradiance more gradual. At civil dawn/dusk irradiance is already very low.
 :::
 
-The dependency of the elevation angle on time of the year and latitude is ellustrated in @fig-sun-elevation-world.
+The dependency of the elevation angle on time of the year and latitude is illustrated in @fig-sun-elevation-world.
 
 ```{r, echo=FALSE}
 #| label: fig-sun-elevation-world
@@ -209,11 +209,13 @@ The length of the path through the atmosphere is, in reality, not exactly the le
 
 ```{r, echo=FALSE}
 #| label: fig-AM-h
-#| fig-cap: Plot of the empirical relationship between sun elevation ($h$) or zenith anglr ($\thets$) and "equivalent" atmosphere thickness traversed by solar radiation between outer space and the Earth's surface (at sea level).
+#| fig-cap: Plot of the empirical relationship between sun elevation ($h$) or zenith anglr ($\theta$) and "equivalent" atmosphere thickness traversed by solar radiation between outer space and the Earth's surface (at sea level). AM1
+#|  is indicated by the horizontal dotted line.
 
 h <- 1:90
 AMx <- relative_AM(h)
 ggplot(data.frame(h, AMx), aes(h, AMx)) +
+  geom_hline(yintercept = 1, linetype = "dotted") +
   geom_line(linewidth = 1) +
   scale_x_continuous(name = expression("Sun elevation angle, "*italic(h)),
                      breaks = c(0, 30, 60, 90),
